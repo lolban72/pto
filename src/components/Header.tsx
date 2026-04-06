@@ -83,26 +83,19 @@ export default function Header({ variant = "solid" }: HeaderProps) {
             })}
           </nav>
 
-          <a
-            href="tel:+74951880349"
-            className={
-              isOverlay
-                ? `
-                  inline-flex h-[44px] items-center justify-center rounded-full
-                  border border-white/20 bg-white/10 px-6 text-[15px]
-                  font-semibold text-white backdrop-blur-sm transition
-                  hover:-translate-y-[1px] hover:bg-white/20
-                `
-                : `
-                  inline-flex h-[44px] items-center justify-center rounded-full
-                  bg-[#2563eb] px-6 text-[15px] font-semibold text-white
-                  shadow-[0_10px_25px_rgba(37,99,235,0.35)] transition
-                  hover:-translate-y-[1px] hover:bg-[#1d4ed8]
-                `
-            }
-          >
-            +7 (495) 188-03-49
-          </a>
+          {!isOverlay && (
+            <a
+              href="tel:+74951880349"
+              className="
+                inline-flex h-[44px] items-center justify-center rounded-full
+                bg-[#2563eb] px-6 text-[15px] font-semibold text-white
+                shadow-[0_10px_25px_rgba(37,99,235,0.35)] transition
+                hover:-translate-y-[1px] hover:bg-[#1d4ed8]
+              "
+            >
+              +7 (495) 188-03-49
+            </a>
+          )}  
         </div>
       </div>
     </header>
