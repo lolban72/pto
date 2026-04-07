@@ -78,8 +78,8 @@ export default function Hero() {
                     <div className="text-[15px] font-semibold tracking-[0.01em] md:text-[16px]">
                       ПТО-ЮГРА
                     </div>
-                    <div className="text-[11px] text-white/58 md:text-[12px]">
-                      Документация строительства
+                    <div className="text-[8px] text-white/58 md:text-[10px]">
+                      ДОКУМЕНТАЦИЯ СТРОИТЕЛЬСТВА
                     </div>
                   </div>
                 </div>
@@ -96,7 +96,7 @@ export default function Hero() {
                   ))}
                 </nav>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-15">
                   <div className="hidden text-right lg:block">
                     <div className="text-[14px] font-semibold text-white">
                       +7 (3452) 55-01-55
@@ -156,7 +156,7 @@ export default function Hero() {
                     className="inline-flex h-[62px] items-center justify-center rounded-[18px] border border-white/10 bg-white/[0.03] px-9 text-[18px] font-semibold text-white backdrop-blur-md transition hover:-translate-y-[1px] hover:bg-white/[0.06]"
                   >
                     Задать вопрос
-                    <span className="ml-3 text-white/70">⌕</span>
+                  
                   </a>
                 </div>
               </div>
@@ -263,9 +263,11 @@ function LogoMark() {
 function MenuIcon() {
   return (
     <span className="flex flex-col gap-[5px]">
+      
       <span className="block h-[2px] w-5 rounded-full bg-white/90" />
       <span className="block h-[2px] w-5 rounded-full bg-white/90" />
       <span className="block h-[2px] w-5 rounded-full bg-white/90" />
+      
     </span>
   );
 }
