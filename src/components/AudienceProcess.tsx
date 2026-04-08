@@ -1,26 +1,31 @@
 "use client";
 
+import Image from "next/image";
+import { useRef } from "react";
 import { useTheme } from "../components/theme-provider";
 
 const audience = [
   {
     title: "Генподрядчики",
     text: "Закрываем объём документации без перегрузки внутренней команды.",
+    icon: "/icons/2.png",
   },
   {
     title: "Подрядчики",
     text: "Подключаемся к объекту на любом этапе и доводим комплект до порядка.",
+    icon: "/icons/3.png",
   },
   {
     title: "Технические заказчики",
     text: "Готовим документы в понятном и проверяемом виде для согласования.",
+    icon: "/icons/4.png",
   },
 ];
 
 const steps = [
   "Получаем исходные данные",
   "Оцениваем объём задач",
-  "Согласовываем состав работ",
+  "Согласовы\nваем состав работ",
   "Подключаем команду",
   "Готовим комплект к сдаче",
   "Сопровождаем результат",
@@ -28,6 +33,16 @@ const steps = [
 
 export default function AudienceProcess() {
   const { isLight } = useTheme();
+  const stepsRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollSteps = (dir: "left" | "right") => {
+    if (!stepsRef.current) return;
+
+    stepsRef.current.scrollBy({
+      left: dir === "right" ? 300 : -300,
+      behavior: "smooth",
+    });
+  };
 
   const cardClass = isLight
     ? "rounded-[22px] border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.06)] backdrop-blur-[18px]"
@@ -71,15 +86,18 @@ export default function AudienceProcess() {
 
           <div className="min-w-0 grid gap-4 md:grid-cols-3">
             {audience.map((item) => (
-              <article key={item.title} className={`${cardClass} pl-3 pt-8`}>
-                <div
-                  className={`mb-5 flex h-9 w-9 items-center justify-center rounded-full ${
-                    isLight
-                      ? "border border-[#4b8dff]/18 bg-[#4b8dff]/8 text-[#4b8dff]"
-                      : "border border-[#4b8dff]/20 bg-[#4b8dff]/10 text-[#6ea3ff]"
-                  }`}
-                >
-                  <CircleMark />
+              <article
+                key={item.title}
+                className={`${cardClass} group flex flex-col rounded-[22px] pl-3 pr-3 pt-5 pb-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(75,141,255,0.12)]`}
+              >
+                <div className="mb-2 flex h-18 w-18 items-center justify-center rounded-xl bg-[radial-gradient(circle,rgba(75,141,255,0.18)_0%,rgba(75,141,255,0.08)_40%,transparent_70%)] shadow-[0_0_25px_rgba(75,141,255,0.25)] transition duration-300 group-hover:shadow-[0_0_34px_rgba(75,141,255,0.4)]">
+                  <Image
+                    src={item.icon}
+                    alt={item.title}
+                    width={52}
+                    height={52}
+                    className="object-contain transition duration-300 group-hover:scale-105"
+                  />
                 </div>
 
                 <div
@@ -102,21 +120,52 @@ export default function AudienceProcess() {
           </div>
 
           <div className={`${cardClass} min-w-0 p-5`}>
-            <div className="max-w-[340px]">
-              <h2 className="text-[30px] font-semibold leading-[0.98] tracking-[-0.03em]">
-                Как мы работаем
-              </h2>
+            <div className="flex items-start justify-between gap-4">
+              <div className="max-w-[340px]">
+                <h2 className="text-[30px] font-semibold leading-[0.98] tracking-[-0.03em]">
+                  Как мы работаем
+                </h2>
 
-              <p
-                className={`mt-1 text-[12px] leading-5 ${
-                  isLight ? "text-slate-500" : "text-white/55"
-                }`}
-              >
-                Простой и прозрачный процесс в 6 шагов
-              </p>
+                <p
+                  className={`mt-1 text-[12px] leading-5 ${
+                    isLight ? "text-slate-500" : "text-white/55"
+                  }`}
+                >
+                  Простой и прозрачный процесс в 6 шагов
+                </p>
+              </div>
+
+              <div className="hidden shrink-0 md:flex items-center gap-2">
+                <button
+                  onClick={() => scrollSteps("left")}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                    isLight
+                      ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                      : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                  }`}
+                  aria-label="Назад"
+                >
+                  ←
+                </button>
+
+                <button
+                  onClick={() => scrollSteps("right")}
+                  className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                    isLight
+                      ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                      : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                  }`}
+                  aria-label="Вперёд"
+                >
+                  →
+                </button>
+              </div>
             </div>
 
-            <div className="mt-3 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div
+              ref={stepsRef}
+              className="mt-3 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
               <div
                 className="
                   grid grid-flow-col gap-4
@@ -128,15 +177,15 @@ export default function AudienceProcess() {
                 {steps.map((step, index) => (
                   <article
                     key={step}
-                    className={`snap-start rounded-[18px] p-4 ${
+                    className={`snap-start rounded-[18px] p-4 transition duration-300 ${
                       isLight
-                        ? "border border-slate-200 bg-slate-50"
-                        : "border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.018)_100%)]"
+                        ? "border border-slate-200 bg-slate-50 hover:bg-slate-100"
+                        : "border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.018)_100%)] hover:bg-white/[0.06]"
                     }`}
                   >
                     <div className="flex">
                       <div
-                        className={`flex h-8 w-8 items-center justify-center rounded-xl ${
+                        className={`flex h-8 w-8 items-center justify-center rounded-xl transition duration-300 ${
                           isLight
                             ? "border border-[#4b8dff]/18 bg-[#4b8dff]/8 text-[#4b8dff]"
                             : "border border-[#4b8dff]/20 bg-[#4b8dff]/10 text-[#6ea3ff]"
@@ -155,7 +204,7 @@ export default function AudienceProcess() {
                     </div>
 
                     <div
-                      className={`mt-2 text-[12px] font-medium leading-5 ${
+                      className={`mt-2 text-[12px] font-medium leading-5 whitespace-pre-line ${
                         isLight ? "text-slate-800" : "text-white/90"
                       }`}
                     >
@@ -165,18 +214,36 @@ export default function AudienceProcess() {
                 ))}
               </div>
             </div>
+
+            <div className="mt-4 flex justify-end gap-2 md:hidden">
+              <button
+                onClick={() => scrollSteps("left")}
+                className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                  isLight
+                    ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                    : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                }`}
+                aria-label="Назад"
+              >
+                ←
+              </button>
+
+              <button
+                onClick={() => scrollSteps("right")}
+                className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                  isLight
+                    ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                    : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                }`}
+                aria-label="Вперёд"
+              >
+                →
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </section>
-  );
-}
-
-function CircleMark() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
   );
 }
 

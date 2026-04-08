@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { useTheme } from "../components/theme-provider";
 
@@ -7,32 +8,32 @@ const services = [
   {
     title: "Исполнительная документация",
     text: "Полный комплект по объекту в требуемом составе.",
-    icon: <DocIcon />,
+    icon: "/icons/1.png",
   },
   {
     title: "Аутсорсинг ПТО",
     text: "Сопровождение объекта на всех этапах.",
-    icon: <UserIcon />,
+    icon: "/icons/5.png",
   },
   {
     title: "Восстановление документов",
     text: "Вернём утерянные разделы и комплекты.",
-    icon: <RefreshIcon />,
+    icon: "/icons/6.png",
   },
   {
     title: "ППР / ППРк",
     text: "Подготовка производственной документации.",
-    icon: <DocIcon />,
+    icon: "/icons/7.png",
   },
   {
     title: "Исполнительные схемы",
     text: "Актуальные схемы и журналы работ.",
-    icon: <NetworkIcon />,
+    icon: "/icons/8.png",
   },
   {
     title: "Сопровождение сдачи",
     text: "Подготовка документации к проверкам и сдаче.",
-    icon: <HubIcon />,
+    icon: "/icons/9.png",
   },
 ];
 
@@ -59,7 +60,7 @@ export default function ServicesShowcase() {
         isLight ? "bg-[#f4f8fc] text-slate-900" : "bg-[#02040e] text-white"
       }`}
     >
-      <div className="mx-auto max-w-[1680px] px-5 pb-4 pt-6 md:px-8 lg:px-10">
+      <div className="mx-auto max-w-[1680px] px-5 pb-4 pt-6 md:px-8 lg:px-10 ">
         <div className="relative mb-6 hidden lg:block">
           <div className={`h-px w-full ${isLight ? "bg-slate-200" : "bg-white/10"}`} />
           <div className="absolute left-[11%] top-0 h-[5px] w-[5px] -translate-y-1/2 rounded-full bg-[#4b8dff]" />
@@ -92,7 +93,7 @@ export default function ServicesShowcase() {
         </div>
 
         <div className="grid gap-4 xl:grid-cols-[230px_minmax(0,1fr)]">
-          <div className={`${cardClass} rounded-[22px] flex flex-col justify-center p-5`}>
+          <div className={`${cardClass} rounded-[22px] flex flex-col justify-center p-5 mt-2`}>
             <h2 className="text-[30px] font-semibold leading-[0.98] tracking-[-0.03em]">
               Наши услуги
             </h2>
@@ -125,16 +126,16 @@ export default function ServicesShowcase() {
             {services.map((item) => (
               <article
                 key={item.title}
-                className={`${cardClass} flex min-h-[150px] min-w-[190px] flex-col rounded-[22px] p-5`}
+                className={`${cardClass} group flex min-h-[150px] mt-2 min-w-[190px] flex-col rounded-[22px] p-5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(75,141,255,0.12)]`}
               >
-                <div
-                  className={`mb-5 flex h-10 w-10 items-center justify-center rounded-2xl ${
-                    isLight
-                      ? "border border-[#4b8dff]/18 bg-[#4b8dff]/8 text-[#4b8dff]"
-                      : "border border-[#4b8dff]/20 bg-[#4b8dff]/10 text-[#6ea3ff]"
-                  }`}
-                >
-                  {item.icon}
+                <div className="mb-2 flex h-16 w-18 items-center justify-center rounded-xl bg-[radial-gradient(circle,rgba(75,141,255,0.18)_0%,rgba(75,141,255,0.08)_40%,transparent_70%)] shadow-[0_0_25px_rgba(75,141,255,0.25)] transition duration-300 group-hover:shadow-[0_0_34px_rgba(75,141,255,0.4)]">
+                  <Image
+                    src={item.icon}
+                    alt={item.title}
+                    width={52}
+                    height={52}
+                    className="object-contain transition duration-300 group-hover:scale-105"
+                  />
                 </div>
 
                 <div
@@ -155,7 +156,7 @@ export default function ServicesShowcase() {
 
                 <div className="mt-auto flex justify-end pt-5">
                   <span
-                    className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[12px] ${
+                    className={`inline-flex h-6 w-6 items-center justify-center rounded-full text-[12px] transition duration-300 group-hover:translate-x-1 ${
                       isLight
                         ? "border border-slate-200 bg-slate-50 text-slate-700"
                         : "border border-white/10 bg-white/[0.04] text-white/70"
@@ -170,98 +171,5 @@ export default function ServicesShowcase() {
         </div>
       </div>
     </section>
-  );
-}
-
-function DocIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path
-        d="M5.5 3.5H11.5L14.5 6.5V15.5C14.5 16.05 14.05 16.5 13.5 16.5H5.5C4.95 16.5 4.5 16.05 4.5 15.5V4.5C4.5 3.95 4.95 3.5 5.5 3.5Z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-      />
-      <path d="M11.5 3.5V6.5H14.5" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M7 9H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M7 12H12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function UserIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="10" cy="7" r="3" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M4.5 16C5.4 13.7 7.4 12.5 10 12.5C12.6 12.5 14.6 13.7 15.5 16"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function RefreshIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <path
-        d="M15.2 8C14.5 6.1 12.7 4.8 10.5 4.8C7.8 4.8 5.5 6.8 5 9.4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M4.8 7.2V9.8H7.4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.8 12C5.5 13.9 7.3 15.2 9.5 15.2C12.2 15.2 14.5 13.2 15 10.6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M15.2 12.8V10.2H12.6"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function NetworkIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="5" cy="5" r="2" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="15" cy="5" r="2" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="5" cy="15" r="2" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="15" cy="15" r="2" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M7 5H13" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M5 7V13" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M15 7V13" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M7 15H13" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
-  );
-}
-
-function HubIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-      <circle cx="10" cy="10" r="2.5" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="5" cy="5" r="1.7" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="15" cy="5" r="1.7" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="5" cy="15" r="1.7" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="15" cy="15" r="1.7" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M6.3 6.3L8.2 8.2" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M13.7 6.3L11.8 8.2" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M6.3 13.7L8.2 11.8" stroke="currentColor" strokeWidth="1.5" />
-      <path d="M13.7 13.7L11.8 11.8" stroke="currentColor" strokeWidth="1.5" />
-    </svg>
   );
 }
