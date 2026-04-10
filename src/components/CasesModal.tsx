@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
-import { useTheme } from "./theme-provider";
 
 type CaseStat = {
   value: string;
@@ -27,8 +26,6 @@ export default function CasesModal({
   onClose,
   cases,
 }: CasesModalProps) {
-  const { isLight } = useTheme();
-
   useEffect(() => {
     if (!isOpen) {
       return;
@@ -49,80 +46,41 @@ export default function CasesModal({
     };
   }, [isOpen, onClose]);
 
-  const theme = useMemo(() => {
-    if (isLight) {
-      return {
-        overlay: "bg-[rgba(15,23,42,0.45)]",
-        modal:
-          "border border-slate-200 bg-white text-slate-900 shadow-[0_30px_80px_rgba(15,23,42,0.18)]",
-        card:
-          "border border-slate-200 bg-white shadow-[0_10px_30px_rgba(15,23,42,0.05)] hover:shadow-[0_18px_50px_rgba(37,99,235,0.10)]",
-        stat: "border border-slate-200 bg-slate-50 text-slate-900",
-        badge: "border border-[#4b8dff]/15 bg-[#4b8dff]/8 text-[#2563eb]",
-        muted: "text-slate-500",
-        mutedSoft: "text-slate-600",
-        cta: "border border-slate-200 bg-[#f7fbff]",
-        close:
-          "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100",
-      };
-    }
-
-    return {
-      overlay: "bg-[rgba(2,6,23,0.72)]",
-      modal:
-        "border border-white/10 bg-[linear-gradient(180deg,rgba(10,14,26,0.98)_0%,rgba(5,8,18,0.98)_100%)] text-white shadow-[0_30px_80px_rgba(0,0,0,0.45)]",
-      card:
-        "border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_10px_30px_rgba(0,0,0,0.16)] hover:shadow-[0_20px_60px_rgba(75,141,255,0.15)]",
-      stat: "border border-white/10 bg-white/[0.03] text-white",
-      badge: "border border-[#72a6ff]/18 bg-[#72a6ff]/10 text-[#8cb7ff]",
-      muted: "text-white/42",
-      mutedSoft: "text-white/62",
-      cta:
-        "border border-white/10 bg-[linear-gradient(180deg,rgba(75,141,255,0.12)_0%,rgba(255,255,255,0.03)_100%)]",
-      close:
-        "border border-white/10 bg-white/[0.05] text-white/80 hover:bg-white/[0.08]",
-    };
-  }, [isLight]);
-
   if (!isOpen) {
     return null;
   }
 
   return (
     <div
-      className={`fixed inset-0 z-[130] flex items-center justify-center px-4 py-6 ${theme.overlay}`}
+      className="cases-modal-theme fixed inset-0 z-[130] flex items-center justify-center bg-[var(--cases-modal-overlay)] px-4 py-6"
       onClick={onClose}
     >
       <div
-        className={`${theme.modal} relative flex max-h-[90vh] w-full max-w-[1320px] flex-col rounded-[30px]`}
+        className="relative flex max-h-[90vh] w-full max-w-[1320px] flex-col rounded-[30px] border border-[var(--cases-modal-border)] bg-[var(--cases-modal-bg)] text-[var(--cases-modal-fg)] shadow-[var(--cases-modal-shadow)]"
         onClick={(event) => event.stopPropagation()}
       >
-        <div
-          className={`flex items-start justify-between gap-4 px-6 py-5 md:px-8 ${
-            isLight ? "border-b border-slate-200" : "border-b border-white/10"
-          }`}
-        >
+        <div className="flex items-start justify-between gap-4 border-b border-[var(--cases-modal-header-border)] px-6 py-5 md:px-8">
           <div>
             <div className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
-              Реальные проекты
+              Р РµР°Р»СЊРЅС‹Рµ РїСЂРѕРµРєС‚С‹
             </div>
 
             <h2 className="mt-2 text-[30px] font-semibold leading-tight tracking-[-0.03em] md:text-[40px]">
-              Кейсы и выполненные задачи
+              РљРµР№СЃС‹ Рё РІС‹РїРѕР»РЅРµРЅРЅС‹Рµ Р·Р°РґР°С‡Рё
             </h2>
 
-            <p className={`mt-3 max-w-[800px] text-[14px] leading-6 ${theme.mutedSoft}`}>
-              Здесь собраны объекты, где мы вели исполнительную документацию,
-              восстанавливали комплект, сопровождали ремонтные и строительные
-              работы и помогали пройти этапы сдачи без затяжных замечаний.
+            <p className="mt-3 max-w-[800px] text-[14px] leading-6 text-[var(--cases-modal-muted-soft)]">
+              Р—РґРµСЃСЊ СЃРѕР±СЂР°РЅС‹ РѕР±СЉРµРєС‚С‹, РіРґРµ РјС‹ РІРµР»Рё РёСЃРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ РґРѕРєСѓРјРµРЅС‚Р°С†РёСЋ,
+              РІРѕСЃСЃС‚Р°РЅР°РІР»РёРІР°Р»Рё РєРѕРјРїР»РµРєС‚, СЃРѕРїСЂРѕРІРѕР¶РґР°Р»Рё СЂРµРјРѕРЅС‚РЅС‹Рµ Рё СЃС‚СЂРѕРёС‚РµР»СЊРЅС‹Рµ
+              СЂР°Р±РѕС‚С‹ Рё РїРѕРјРѕРіР°Р»Рё РїСЂРѕР№С‚Рё СЌС‚Р°РїС‹ СЃРґР°С‡Рё Р±РµР· Р·Р°С‚СЏР¶РЅС‹С… Р·Р°РјРµС‡Р°РЅРёР№.
             </p>
           </div>
 
           <button
             type="button"
             onClick={onClose}
-            aria-label="Закрыть"
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${theme.close}`}
+            aria-label="Р—Р°РєСЂС‹С‚СЊ"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--cases-modal-close-border)] bg-[var(--cases-modal-close-bg)] text-[var(--cases-modal-close-fg)] transition hover:bg-[var(--cases-modal-close-hover-bg)]"
           >
             <CloseIcon />
           </button>
@@ -133,7 +91,7 @@ export default function CasesModal({
             {cases.map((item) => (
               <article
                 key={item.title}
-                className={`${theme.card} group overflow-hidden rounded-[26px] transition duration-300 hover:-translate-y-1`}
+                className="group overflow-hidden rounded-[26px] border border-[var(--cases-modal-card-border)] bg-[var(--cases-modal-card-bg)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(75,141,255,0.15)]"
               >
                 <div className="relative h-[260px] overflow-hidden">
                   <Image
@@ -142,13 +100,7 @@ export default function CasesModal({
                     fill
                     className="object-cover object-[50%_30%] transition duration-700 group-hover:scale-[1.04]"
                   />
-                  <div
-                    className={`absolute inset-0 ${
-                      isLight
-                        ? "bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(15,23,42,0.18)_100%)]"
-                        : "bg-[linear-gradient(180deg,rgba(2,6,23,0)_0%,rgba(2,6,23,0.52)_100%)]"
-                    }`}
-                  />
+                  <div className="absolute inset-0" style={{ background: "var(--cases-modal-overlay-image)" }} />
                 </div>
 
                 <div className="p-5 md:p-6">
@@ -156,7 +108,7 @@ export default function CasesModal({
                     {item.title}
                   </h3>
 
-                  <p className={`mt-3 text-[14px] leading-6 ${theme.mutedSoft}`}>
+                  <p className="mt-3 text-[14px] leading-6 text-[var(--cases-modal-muted-soft)]">
                     {item.text}
                   </p>
 
@@ -164,11 +116,9 @@ export default function CasesModal({
                     {item.stats.map((stat, index) => (
                       <div
                         key={`${item.title}-${stat.label}`}
-                        className={`flex items-center gap-3 rounded-[18px] p-3.5 ${theme.stat}`}
+                        className="flex items-center gap-3 rounded-[18px] border border-[var(--cases-modal-stat-border)] bg-[var(--cases-modal-stat-bg)] p-3.5"
                       >
-                        <div
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${theme.badge}`}
-                        >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--cases-modal-badge-border)] bg-[var(--cases-modal-badge-bg)] text-[var(--cases-modal-badge-fg)]">
                           {index === 0 ? <CalendarMini /> : <StatusMini />}
                         </div>
 
@@ -176,7 +126,7 @@ export default function CasesModal({
                           <div className="text-[13px] font-semibold leading-4">
                             {stat.value}
                           </div>
-                          <div className={`mt-1 text-[12px] leading-4 ${theme.muted}`}>
+                          <div className="mt-1 text-[12px] leading-4 text-[var(--cases-modal-muted)]">
                             {stat.label}
                           </div>
                         </div>
@@ -188,19 +138,19 @@ export default function CasesModal({
             ))}
           </div>
 
-          <div className={`mt-6 rounded-[24px] p-5 md:p-6 ${theme.cta}`}>
+          <div className="mt-6 rounded-[24px] border border-[var(--cases-modal-cta-border)] bg-[var(--cases-modal-cta-bg)] p-5 md:p-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="max-w-[560px] text-[20px] font-semibold leading-tight md:text-[26px]">
-                  Хотите такой же порядок
+                  РҐРѕС‚РёС‚Рµ С‚Р°РєРѕР№ Р¶Рµ РїРѕСЂСЏРґРѕРє
                   <br />
-                  по документации на вашем объекте?
+                  РїРѕ РґРѕРєСѓРјРµРЅС‚Р°С†РёРё РЅР° РІР°С€РµРј РѕР±СЉРµРєС‚Рµ?
                 </div>
 
-                <p className={`mt-2 max-w-[780px] text-[14px] leading-6 ${theme.mutedSoft}`}>
-                  Подключимся к проекту, оценим объем задач, подготовим понятный
-                  план работ и возьмем на себя сопровождение документации под ваш
-                  объект.
+                <p className="mt-2 max-w-[780px] text-[14px] leading-6 text-[var(--cases-modal-muted-soft)]">
+                  РџРѕРґРєР»СЋС‡РёРјСЃСЏ Рє РїСЂРѕРµРєС‚Сѓ, РѕС†РµРЅРёРј РѕР±СЉРµРј Р·Р°РґР°С‡, РїРѕРґРіРѕС‚РѕРІРёРј РїРѕРЅСЏС‚РЅС‹Р№
+                  РїР»Р°РЅ СЂР°Р±РѕС‚ Рё РІРѕР·СЊРјРµРј РЅР° СЃРµР±СЏ СЃРѕРїСЂРѕРІРѕР¶РґРµРЅРёРµ РґРѕРєСѓРјРµРЅС‚Р°С†РёРё РїРѕРґ РІР°С€
+                  РѕР±СЉРµРєС‚.
                 </p>
               </div>
 
@@ -209,7 +159,7 @@ export default function CasesModal({
                 onClick={onClose}
                 className="inline-flex h-[44px] items-center justify-center rounded-full bg-[#4b8dff] px-5 text-[14px] font-medium text-white transition hover:bg-[#3b7df0]"
               >
-                Связаться
+                РЎРІСЏР·Р°С‚СЊСЃСЏ
               </a>
             </div>
           </div>

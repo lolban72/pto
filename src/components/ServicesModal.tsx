@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { useTheme } from "./theme-provider";
 
 type ServiceItem = {
   title: string;
@@ -21,8 +20,6 @@ export default function ServicesModal({
   onClose,
   services,
 }: ServicesModalProps) {
-  const { isLight } = useTheme();
-
   useEffect(() => {
     if (!isOpen) {
       return;
@@ -48,60 +45,40 @@ export default function ServicesModal({
     return null;
   }
 
-  const overlayClass = isLight
-    ? "bg-[rgba(15,23,42,0.45)]"
-    : "bg-[rgba(2,6,23,0.72)]";
-
-  const modalClass = isLight
-    ? "border border-slate-200 bg-white text-slate-900 shadow-[0_30px_80px_rgba(15,23,42,0.18)]"
-    : "border border-white/10 bg-[linear-gradient(180deg,rgba(10,14,26,0.98)_0%,rgba(5,8,18,0.98)_100%)] text-white shadow-[0_30px_80px_rgba(0,0,0,0.45)]";
-
-  const cardClass = isLight
-    ? "border border-slate-200 bg-slate-50/80"
-    : "border border-white/10 bg-white/[0.04]";
-
   return (
     <div
-      className={`fixed inset-0 z-[120] overflow-y-auto px-4 py-4 md:px-6 md:py-6 ${overlayClass}`}
+      className="services-modal-theme fixed inset-0 z-[120] overflow-y-auto bg-[var(--services-modal-overlay)] px-4 py-4 md:px-6 md:py-6"
       onClick={onClose}
     >
       <div className="flex min-h-full items-start justify-center md:items-center">
         <div
-          className={`${modalClass} relative my-auto flex max-h-[calc(100vh-2rem)] w-full max-w-[1180px] flex-col overflow-hidden rounded-[30px]`}
+          className="relative my-auto flex max-h-[calc(100vh-2rem)] w-full max-w-[1180px] flex-col overflow-hidden rounded-[30px] border border-[var(--services-modal-border)] bg-[var(--services-modal-bg)] text-[var(--services-modal-fg)] shadow-[var(--services-modal-shadow)]"
           onClick={(event) => event.stopPropagation()}
         >
-          <div className="shrink-0 border-b border-white/10 px-6 py-5 md:px-8">
+          <div className="shrink-0 border-b border-[var(--services-modal-card-border)] px-6 py-5 md:px-8">
             <div className="flex items-start justify-between gap-4">
               <div>
                 <div className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
-                  Все услуги
+                  Р’СЃРµ СѓСЃР»СѓРіРё
                 </div>
 
                 <h2 className="mt-2 text-[30px] font-semibold leading-tight tracking-[-0.03em] md:text-[40px]">
-                  Комплексное сопровождение ПТО
+                  РљРѕРјРїР»РµРєСЃРЅРѕРµ СЃРѕРїСЂРѕРІРѕР¶РґРµРЅРёРµ РџРўРћ
                 </h2>
 
-                <p
-                  className={`mt-3 max-w-[760px] text-[14px] leading-6 ${
-                    isLight ? "text-slate-600" : "text-white/60"
-                  }`}
-                >
-                  Закрываем исполнительную документацию, производственные
-                  разделы, восстановление комплекта и подготовку к сдаче. Формат
-                  подключения подбираем под ваш объект, сроки и текущий уровень
-                  хаоса.
+                <p className="mt-3 max-w-[760px] text-[14px] leading-6 text-[var(--services-modal-muted)]">
+                  Р—Р°РєСЂС‹РІР°РµРј РёСЃРїРѕР»РЅРёС‚РµР»СЊРЅСѓСЋ РґРѕРєСѓРјРµРЅС‚Р°С†РёСЋ, РїСЂРѕРёР·РІРѕРґСЃС‚РІРµРЅРЅС‹Рµ
+                  СЂР°Р·РґРµР»С‹, РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РєРѕРјРїР»РµРєС‚Р° Рё РїРѕРґРіРѕС‚РѕРІРєСѓ Рє СЃРґР°С‡Рµ. Р¤РѕСЂРјР°С‚
+                  РїРѕРґРєР»СЋС‡РµРЅРёСЏ РїРѕРґР±РёСЂР°РµРј РїРѕРґ РІР°С€ РѕР±СЉРµРєС‚, СЃСЂРѕРєРё Рё С‚РµРєСѓС‰РёР№ СѓСЂРѕРІРµРЅСЊ
+                  С…Р°РѕСЃР°.
                 </p>
               </div>
 
               <button
                 type="button"
                 onClick={onClose}
-                aria-label="Закрыть"
-                className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
-                  isLight
-                    ? "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
-                    : "border border-white/10 bg-white/[0.05] text-white/80 hover:bg-white/[0.08]"
-                }`}
+                aria-label="Р—Р°РєСЂС‹С‚СЊ"
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--services-modal-close-border)] bg-[var(--services-modal-close-bg)] text-[var(--services-modal-close-fg)] transition hover:bg-[var(--services-modal-close-hover-bg)]"
               >
                 <CloseIcon />
               </button>
@@ -113,7 +90,7 @@ export default function ServicesModal({
               {services.map((item) => (
                 <article
                   key={item.title}
-                  className={`${cardClass} group rounded-[24px] p-5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(75,141,255,0.12)]`}
+                  className="group rounded-[24px] border border-[var(--services-modal-card-border)] bg-[var(--services-modal-card-bg)] p-5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(75,141,255,0.12)]"
                 >
                   <div className="mb-4 flex h-[74px] w-[74px] items-center justify-center rounded-[20px] bg-[radial-gradient(circle,rgba(75,141,255,0.2)_0%,rgba(75,141,255,0.08)_45%,transparent_72%)] shadow-[0_0_28px_rgba(75,141,255,0.24)] transition duration-300 group-hover:shadow-[0_0_36px_rgba(75,141,255,0.38)]">
                     <Image
@@ -129,37 +106,23 @@ export default function ServicesModal({
                     {item.title}
                   </h3>
 
-                  <p
-                    className={`mt-3 text-[14px] leading-6 ${
-                      isLight ? "text-slate-600" : "text-white/60"
-                    }`}
-                  >
+                  <p className="mt-3 text-[14px] leading-6 text-[var(--services-modal-muted)]">
                     {item.text}
                   </p>
                 </article>
               ))}
             </div>
 
-            <div
-              className={`mt-6 rounded-[24px] p-5 md:p-6 ${
-                isLight
-                  ? "border border-slate-200 bg-[#f7fbff]"
-                  : "border border-white/10 bg-[linear-gradient(180deg,rgba(75,141,255,0.12)_0%,rgba(255,255,255,0.03)_100%)]"
-              }`}
-            >
+            <div className="mt-6 rounded-[24px] border border-[var(--services-modal-cta-border)] bg-[var(--services-modal-cta-bg)] p-5 md:p-6">
               <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
                 <div>
                   <div className="text-[22px] font-semibold leading-tight md:text-[26px]">
-                    Нужен формат под ваш объект?
+                    РќСѓР¶РµРЅ С„РѕСЂРјР°С‚ РїРѕРґ РІР°С€ РѕР±СЉРµРєС‚?
                   </div>
 
-                  <p
-                    className={`mt-2 max-w-[720px] text-[14px] leading-6 ${
-                      isLight ? "text-slate-600" : "text-white/60"
-                    }`}
-                  >
-                    Подберем конфигурацию работ: разовая подготовка комплекта,
-                    ведение отдельных разделов или полноценный аутсорсинг ПТО.
+                  <p className="mt-2 max-w-[720px] text-[14px] leading-6 text-[var(--services-modal-muted)]">
+                    РџРѕРґР±РµСЂРµРј РєРѕРЅС„РёРіСѓСЂР°С†РёСЋ СЂР°Р±РѕС‚: СЂР°Р·РѕРІР°СЏ РїРѕРґРіРѕС‚РѕРІРєР° РєРѕРјРїР»РµРєС‚Р°,
+                    РІРµРґРµРЅРёРµ РѕС‚РґРµР»СЊРЅС‹С… СЂР°Р·РґРµР»РѕРІ РёР»Рё РїРѕР»РЅРѕС†РµРЅРЅС‹Р№ Р°СѓС‚СЃРѕСЂСЃРёРЅРі РџРўРћ.
                   </p>
                 </div>
 
@@ -168,7 +131,7 @@ export default function ServicesModal({
                   onClick={onClose}
                   className="inline-flex h-[44px] items-center justify-center rounded-full bg-[#4b8dff] px-5 text-[14px] font-medium text-white transition hover:bg-[#3b7df0]"
                 >
-                  Связаться
+                  РЎРІСЏР·Р°С‚СЊСЃСЏ
                 </a>
               </div>
             </div>

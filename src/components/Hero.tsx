@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -10,7 +11,10 @@ import {
   trustFeatures,
   trustStats,
 } from "../lib/site-content";
-import PricingModal from "./PricingModal";
+
+const PricingModal = dynamic(() => import("./PricingModal"), {
+  ssr: false,
+});
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,6 +51,7 @@ export default function Hero() {
             alt="Строительный объект и исполнительная документация"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-[78%_50%]"
           />
         </div>
@@ -309,10 +314,12 @@ export default function Hero() {
         </div>
       ) : null}
 
-      <PricingModal
-        isOpen={pricingOpen}
-        onClose={() => setPricingOpen(false)}
-      />
+      {pricingOpen ? (
+        <PricingModal
+          isOpen={pricingOpen}
+          onClose={() => setPricingOpen(false)}
+        />
+      ) : null}
     </>
   );
 }

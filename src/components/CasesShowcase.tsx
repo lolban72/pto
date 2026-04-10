@@ -1,247 +1,165 @@
-"use client";
-
 import Image from "next/image";
-import { useMemo, useState } from "react";
 import { cases } from "../lib/site-content";
-import { useTheme } from "./theme-provider";
-import CasesModal from "./CasesModal";
+import CasesModalTrigger from "./CasesModalTrigger";
 
 export default function CasesShowcase() {
-  const { isLight } = useTheme();
-  const [isCasesModalOpen, setIsCasesModalOpen] = useState(false);
-
-  const trustImage = isLight ? "/images/15-light.webp" : "/images/15.webp";
-
-  const theme = useMemo(() => {
-    if (isLight) {
-      return {
-        section: "bg-[#f6f8fc] text-slate-950",
-        shell:
-          "border border-slate-200 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(248,250,252,0.94)_100%)] shadow-[0_20px_80px_rgba(15,23,42,0.06)]",
-        card:
-          "border border-slate-200 bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)] hover:shadow-[0_24px_64px_rgba(37,99,235,0.12)]",
-        badge: "border border-[#4b8dff]/16 bg-[#4b8dff]/8 text-[#2563eb]",
-        muted: "text-slate-500",
-        mutedSoft: "text-slate-600",
-        overlay:
-          "bg-[linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(15,23,42,0.18)_100%)]",
-        stat: "border border-slate-200 bg-slate-50/90 text-slate-900",
-        divider: "bg-slate-200/80",
-      };
-    }
-
-    return {
-      section: "bg-[#02040e] text-white",
-      shell:
-        "border border-white/10 bg-[linear-gradient(180deg,rgba(11,18,32,0.96)_0%,rgba(5,8,22,0.96)_100%)] shadow-[0_24px_80px_rgba(0,0,0,0.35)]",
-      card:
-        "border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.02)_100%)] shadow-[0_10px_30px_rgba(0,0,0,0.18)] hover:shadow-[0_24px_64px_rgba(75,141,255,0.16)]",
-      badge: "border border-[#72a6ff]/18 bg-[#72a6ff]/10 text-[#8cb7ff]",
-      muted: "text-white/42",
-      mutedSoft: "text-white/62",
-      overlay:
-        "bg-[linear-gradient(180deg,rgba(2,6,23,0)_0%,rgba(2,6,23,0.52)_100%)]",
-      stat: "border border-white/10 bg-white/[0.03] text-white",
-      divider: "bg-white/6",
-    };
-  }, [isLight]);
-
   return (
-    <>
-      <section id="cases" className={`relative overflow-hidden ${theme.section}`}>
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-[18%] top-[8%] h-[260px] w-[260px] rounded-full bg-[#4b8dff]/10 blur-3xl" />
-          <div className="absolute bottom-[6%] right-[10%] h-[280px] w-[280px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
+    <section
+      id="cases"
+      className="cases-theme relative overflow-hidden bg-[var(--cases-section-bg)] text-[var(--cases-section-fg)]"
+    >
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-[18%] top-[8%] h-[260px] w-[260px] rounded-full bg-[#4b8dff]/10 blur-3xl" />
+        <div className="absolute bottom-[6%] right-[10%] h-[280px] w-[280px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-[1680px] px-5 py-8 md:px-8 lg:px-10">
+        <div className="mb-6">
+          <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4b8dff]">
+            РџСЂР°РєС‚РёРєР° Рё СЂРµР·СѓР»СЊС‚Р°С‚
+          </div>
+          <h2 className="mt-3 text-[34px] font-semibold leading-[0.94] tracking-[-0.05em] md:text-[48px]">
+            РљРµР№СЃС‹, РіРґРµ РїРѕСЂСЏРґРѕРє
+            <br />
+            РїРѕ РґРѕРєСѓРјРµРЅС‚Р°С†РёРё СЃС‚Р°Р» С‡Р°СЃС‚СЊСЋ СЂРµР·СѓР»СЊС‚Р°С‚Р°
+          </h2>
         </div>
 
-        <div className="relative mx-auto max-w-[1680px] px-5 py-8 md:px-8 lg:px-10">
-          <div className="mb-6">
-            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4b8dff]">
-              Практика и результат
+        <div className="relative grid items-stretch gap-8 xl:grid-cols-[420px_minmax(0,1fr)] xl:gap-10">
+          <div className="absolute bottom-0 left-[455px] top-0 hidden w-px bg-[var(--cases-divider)] xl:block" />
+
+          <div className="relative flex h-full overflow-hidden rounded-[34px] border border-[var(--cases-shell-border)] bg-[var(--cases-shell-bg)] p-6 shadow-[var(--cases-shell-shadow)] md:p-8 lg:p-9">
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(75,141,255,0.12),transparent_42%)]" />
+              <div className="absolute left-[-40px] top-[-40px] h-[140px] w-[140px] rounded-full bg-[#4b8dff]/10 blur-3xl" />
+              <div className="absolute bottom-[-60px] right-[-40px] h-[180px] w-[180px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
             </div>
-            <h2 className="mt-3 text-[34px] font-semibold leading-[0.94] tracking-[-0.05em] md:text-[48px]">
-              Кейсы, где порядок
-              <br />
-              по документации стал частью результата
-            </h2>
-          </div>
 
-          <div className="relative grid items-stretch gap-8 xl:grid-cols-[420px_minmax(0,1fr)] xl:gap-10">
-            <div
-              className={`absolute bottom-0 left-[455px] top-0 hidden w-px xl:block ${theme.divider}`}
-            />
-
-            <div className={`relative flex h-full overflow-hidden rounded-[34px] p-6 md:p-8 lg:p-9 ${theme.shell}`}>
-              <div className="pointer-events-none absolute inset-0">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(75,141,255,0.12),transparent_42%)]" />
-                <div className="absolute left-[-40px] top-[-40px] h-[140px] w-[140px] rounded-full bg-[#4b8dff]/10 blur-3xl" />
-                <div className="absolute bottom-[-60px] right-[-40px] h-[180px] w-[180px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
+            <div className="relative flex h-full w-full flex-col">
+              <div className="inline-flex w-fit items-center rounded-full border border-[var(--cases-filter-border)] bg-[var(--cases-filter-bg)] px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--cases-filter-fg)]">
+                Р РµР°Р»СЊРЅС‹Рµ РѕР±СЉРµРєС‚С‹
               </div>
 
-              <div className="relative flex h-full w-full flex-col">
-                <div
-                  className={`inline-flex w-fit items-center rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-[0.16em] ${
-                    isLight
-                      ? "border border-slate-200 bg-slate-50 text-slate-500"
-                      : "border border-white/10 bg-white/[0.04] text-white/45"
-                  }`}
-                >
-                  Реальные объекты
-                </div>
+              <p className="mt-5 max-w-[320px] text-[15px] leading-7 text-[var(--cases-muted-soft)]">
+                РџРѕРєР°Р·С‹РІР°РµРј РѕР±СЉРµРєС‚С‹, РіРґРµ РІС‹СЃС‚СЂРѕРёР»Рё РїРѕРЅСЏС‚РЅСѓСЋ СЃРёСЃС‚РµРјСѓ РІРµРґРµРЅРёСЏ
+                РёСЃРїРѕР»РЅРёС‚РµР»СЊРЅРѕР№ РґРѕРєСѓРјРµРЅС‚Р°С†РёРё, СЃРѕРєСЂР°С‚РёР»Рё РѕР±СЉРµРј СЂСѓС‡РЅРѕРіРѕ РєРѕРЅС‚СЂРѕР»СЏ
+                Рё РїРѕРјРѕРіР»Рё РїСЂРѕР№С‚Рё СЌС‚Р°РїС‹ СЃРґР°С‡Рё Р±РµР· Р·Р°С‚СЏР¶РЅС‹С… РґРѕР±РѕСЂРѕРІ.
+              </p>
 
-                <p className={`mt-5 max-w-[320px] text-[15px] leading-7 ${theme.mutedSoft}`}>
-                  Показываем объекты, где выстроили понятную систему ведения
-                  исполнительной документации, сократили объем ручного контроля
-                  и помогли пройти этапы сдачи без затяжных доборов.
-                </p>
-
-                <div className="mt-6 grid gap-3">
-                  {[
-                    "Работаем в логике сроков, замечаний и состава комплекта",
-                    "Подстраиваемся под тип объекта и требования заказчика",
-                    "Держим в фокусе не только оформление, но и финальную передачу",
-                  ].map((item) => (
-                    <div
-                      key={item}
-                      className={`rounded-[20px] px-4 py-4 text-[14px] leading-6 ${
-                        isLight
-                          ? "border border-slate-200 bg-slate-50 text-slate-700"
-                          : "border border-white/10 bg-white/[0.04] text-white/76"
-                      }`}
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setIsCasesModalOpen(true)}
-                  className={`mt-7 inline-flex h-[44px] w-fit items-center rounded-full px-5 text-[14px] font-medium transition ${
-                    isLight
-                      ? "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
-                      : "border border-white/10 bg-white/[0.05] text-white/88 hover:bg-white/[0.08]"
-                  }`}
-                >
-                  Смотреть все кейсы
-                  <span className="ml-2">→</span>
-                </button>
-
-                <div className="mt-auto pt-8">
+              <div className="mt-6 grid gap-3">
+                {[
+                  "Р Р°Р±РѕС‚Р°РµРј РІ Р»РѕРіРёРєРµ СЃСЂРѕРєРѕРІ, Р·Р°РјРµС‡Р°РЅРёР№ Рё СЃРѕСЃС‚Р°РІР° РєРѕРјРїР»РµРєС‚Р°",
+                  "РџРѕРґСЃС‚СЂР°РёРІР°РµРјСЃСЏ РїРѕРґ С‚РёРї РѕР±СЉРµРєС‚Р° Рё С‚СЂРµР±РѕРІР°РЅРёСЏ Р·Р°РєР°Р·С‡РёРєР°",
+                  "Р”РµСЂР¶РёРј РІ С„РѕРєСѓСЃРµ РЅРµ С‚РѕР»СЊРєРѕ РѕС„РѕСЂРјР»РµРЅРёРµ, РЅРѕ Рё С„РёРЅР°Р»СЊРЅСѓСЋ РїРµСЂРµРґР°С‡Сѓ",
+                ].map((item) => (
                   <div
-                    className={`rounded-[24px] p-4 md:p-5 ${
-                      isLight
-                        ? "border border-slate-200 bg-slate-50/70"
-                        : "border border-white/10 bg-white/[0.03]"
-                    }`}
+                    key={item}
+                    className="rounded-[20px] border border-[var(--cases-chip-border)] bg-[var(--cases-chip-bg)] px-4 py-4 text-[14px] leading-6 text-[var(--cases-chip-fg)]"
                   >
-                    <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <div className={`font-mono text-[11px] uppercase tracking-[0.16em] ${isLight ? "text-slate-400" : "text-white/38"}`}>
-                          Нам доверяют
-                        </div>
+                    {item}
+                  </div>
+                ))}
+              </div>
 
-                        <p className={`mt-2 max-w-[230px] text-[12px] leading-5 ${theme.mutedSoft}`}>
-                          Работаем с девелоперами, промышленными заказчиками и
-                          крупными подрядными контурами.
-                        </p>
+              <CasesModalTrigger />
+
+              <div className="mt-auto pt-8">
+                <div className="rounded-[24px] border border-[var(--cases-trust-panel-border)] bg-[var(--cases-trust-panel-bg)] p-4 md:p-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-[var(--cases-muted)]">
+                        РќР°Рј РґРѕРІРµСЂСЏСЋС‚
                       </div>
 
-                      <div
-                        className={`hidden h-10 w-10 shrink-0 items-center justify-center rounded-full md:flex ${
-                          isLight
-                            ? "border border-slate-200 bg-white text-slate-500"
-                            : "border border-white/10 bg-white/[0.04] text-white/55"
-                        }`}
-                      >
-                        <TrustMini />
-                      </div>
+                      <p className="mt-2 max-w-[230px] text-[12px] leading-5 text-[var(--cases-muted-soft)]">
+                        Р Р°Р±РѕС‚Р°РµРј СЃ РґРµРІРµР»РѕРїРµСЂР°РјРё, РїСЂРѕРјС‹С€Р»РµРЅРЅС‹РјРё Р·Р°РєР°Р·С‡РёРєР°РјРё Рё
+                        РєСЂСѓРїРЅС‹РјРё РїРѕРґСЂСЏРґРЅС‹РјРё РєРѕРЅС‚СѓСЂР°РјРё.
+                      </p>
                     </div>
 
-                    <div className="relative mt-4 overflow-hidden rounded-[18px]">
-                      <div
-                        className={`pointer-events-none absolute inset-0 z-10 ${
-                          isLight
-                            ? "bg-gradient-to-t from-white/20 to-transparent"
-                            : "bg-gradient-to-t from-black/30 to-transparent"
-                        }`}
+                    <div className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--cases-trust-icon-border)] bg-[var(--cases-trust-icon-bg)] text-[var(--cases-trust-icon-fg)] md:flex">
+                      <TrustMini />
+                    </div>
+                  </div>
+
+                  <div className="relative mt-4 overflow-hidden rounded-[18px]">
+                    <div
+                      className="pointer-events-none absolute inset-0 z-10"
+                      style={{ background: "var(--cases-trust-overlay)" }}
+                    />
+                    <div className="relative aspect-[16/9] w-full">
+                      <Image
+                        src="/images/15.webp"
+                        alt="РљРѕРјРїР°РЅРёРё Рё РїСЂРѕРµРєС‚С‹, СЃ РєРѕС‚РѕСЂС‹РјРё СЂР°Р±РѕС‚Р°РµС‚ РџРўРћ-Р®Р“Р Рђ"
+                        fill
+                        className="theme-only-dark object-cover"
                       />
-                      <div className="relative aspect-[16/9] w-full">
-                        <Image
-                          src={trustImage}
-                          alt="Компании и проекты, с которыми работает ПТО-ЮГРА"
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
+                      <Image
+                        src="/images/15-light.webp"
+                        alt="РљРѕРјРїР°РЅРёРё Рё РїСЂРѕРµРєС‚С‹, СЃ РєРѕС‚РѕСЂС‹РјРё СЂР°Р±РѕС‚Р°РµС‚ РџРўРћ-Р®Р“Р Рђ"
+                        fill
+                        className="theme-only-light object-cover"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {cases.map((item) => (
-                <article
-                  key={item.title}
-                  className={`group flex h-full min-h-[380px] flex-col overflow-hidden rounded-[28px] transition duration-300 hover:-translate-y-1 ${theme.card}`}
-                >
-                  <div className="relative h-[280px] overflow-hidden">
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className="object-cover object-[50%_30%] transition duration-700 group-hover:scale-[1.04]"
-                    />
-                    <div className={`absolute inset-0 ${theme.overlay}`} />
-                  </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {cases.map((item) => (
+              <article
+                key={item.title}
+                className="group flex h-full min-h-[380px] flex-col overflow-hidden rounded-[28px] border border-[var(--cases-card-border)] bg-[var(--cases-card-bg)] shadow-[var(--cases-card-shadow)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_64px_rgba(75,141,255,0.16)]"
+              >
+                <div className="relative h-[280px] overflow-hidden">
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover object-[50%_30%] transition duration-700 group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0" style={{ background: "var(--cases-overlay)" }} />
+                </div>
 
-                  <div className="flex flex-1 flex-col p-5">
-                    <h3 className="text-[18px] font-semibold leading-[1.1] tracking-[-0.02em]">
-                      {item.title}
-                    </h3>
+                <div className="flex flex-1 flex-col p-5">
+                  <h3 className="text-[18px] font-semibold leading-[1.1] tracking-[-0.02em]">
+                    {item.title}
+                  </h3>
 
-                    <p className={`mt-3 text-[14px] leading-7 ${theme.mutedSoft}`}>
-                      {item.text}
-                    </p>
+                  <p className="mt-3 text-[14px] leading-7 text-[var(--cases-muted-soft)]">
+                    {item.text}
+                  </p>
 
-                    <div className="mt-auto grid grid-cols-2 gap-3 pt-5">
-                      {item.stats.map((stat, index) => (
-                        <div
-                          key={`${item.title}-${stat.label}`}
-                          className={`flex items-center gap-3 rounded-[18px] p-3 ${theme.stat}`}
-                        >
-                          <div
-                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${theme.badge}`}
-                          >
-                            {index === 0 ? <CalendarMini /> : <StatusMini />}
+                  <div className="mt-auto grid grid-cols-2 gap-3 pt-5">
+                    {item.stats.map((stat, index) => (
+                      <div
+                        key={`${item.title}-${stat.label}`}
+                        className="flex items-center gap-3 rounded-[18px] border border-[var(--cases-stat-border)] bg-[var(--cases-stat-bg)] p-3"
+                      >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--cases-badge-border)] bg-[var(--cases-badge-bg)] text-[var(--cases-badge-fg)]">
+                          {index === 0 ? <CalendarMini /> : <StatusMini />}
+                        </div>
+
+                        <div className="min-w-0">
+                          <div className="text-[13px] font-semibold leading-4">
+                            {stat.value}
                           </div>
-
-                          <div className="min-w-0">
-                            <div className="text-[13px] font-semibold leading-4">
-                              {stat.value}
-                            </div>
-                            <div className={`mt-1 text-[12px] leading-4 ${theme.muted}`}>
-                              {stat.label}
-                            </div>
+                          <div className="mt-1 text-[12px] leading-4 text-[var(--cases-muted)]">
+                            {stat.label}
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
-                </article>
-              ))}
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
-      </section>
-
-      <CasesModal
-        isOpen={isCasesModalOpen}
-        onClose={() => setIsCasesModalOpen(false)}
-        cases={cases}
-      />
-    </>
+      </div>
+    </section>
   );
 }
 

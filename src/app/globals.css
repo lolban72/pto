@@ -70,3 +70,361 @@ body::before {
     radial-gradient(circle at 85% 12%, rgba(124, 58, 237, 0.08), transparent 24%);
   opacity: 0.9;
 }
+
+.services-theme {
+  --services-section-bg: #02040e;
+  --services-section-fg: #ffffff;
+  --services-card-border: rgba(255, 255, 255, 0.1);
+  --services-card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.018) 100%);
+  --services-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  --services-button-border: rgba(255, 255, 255, 0.1);
+  --services-button-bg: rgba(255, 255, 255, 0.05);
+  --services-button-hover-bg: rgba(255, 255, 255, 0.08);
+  --services-button-fg: rgba(255, 255, 255, 0.85);
+  --services-muted: rgba(255, 255, 255, 0.58);
+}
+
+html[data-theme="light"] .services-theme {
+  --services-section-bg: #f4f8fc;
+  --services-section-fg: #0f172a;
+  --services-card-border: rgb(226, 232, 240);
+  --services-card-bg: #ffffff;
+  --services-card-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --services-button-border: rgb(226, 232, 240);
+  --services-button-bg: rgb(248, 250, 252);
+  --services-button-hover-bg: rgb(241, 245, 249);
+  --services-button-fg: rgb(51, 65, 85);
+  --services-muted: rgb(71, 85, 105);
+}
+
+.audience-theme {
+  --audience-section-bg: #02040e;
+  --audience-section-fg: #ffffff;
+  --audience-card-border: rgba(255, 255, 255, 0.1);
+  --audience-card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.018) 100%);
+  --audience-card-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  --audience-muted: rgba(255, 255, 255, 0.58);
+  --audience-soft-muted: rgba(255, 255, 255, 0.55);
+  --audience-control-border: rgba(255, 255, 255, 0.1);
+  --audience-control-bg: rgba(255, 255, 255, 0.04);
+  --audience-control-hover-bg: rgba(255, 255, 255, 0.07);
+  --audience-control-fg: rgba(255, 255, 255, 0.75);
+  --audience-step-border: rgba(255, 255, 255, 0.08);
+  --audience-step-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.018) 100%);
+  --audience-step-hover-bg: rgba(255, 255, 255, 0.06);
+  --audience-step-fg: rgba(255, 255, 255, 0.9);
+  --audience-step-index: rgba(255, 255, 255, 0.9);
+  --audience-badge-border: rgba(75, 141, 255, 0.2);
+  --audience-badge-bg: rgba(75, 141, 255, 0.1);
+  --audience-badge-fg: #6ea3ff;
+}
+
+html[data-theme="light"] .audience-theme {
+  --audience-section-bg: #f4f8fc;
+  --audience-section-fg: #0f172a;
+  --audience-card-border: rgb(226, 232, 240);
+  --audience-card-bg: #ffffff;
+  --audience-card-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  --audience-muted: rgb(71, 85, 105);
+  --audience-soft-muted: rgb(100, 116, 139);
+  --audience-control-border: rgb(226, 232, 240);
+  --audience-control-bg: #ffffff;
+  --audience-control-hover-bg: rgb(248, 250, 252);
+  --audience-control-fg: rgb(51, 65, 85);
+  --audience-step-border: rgb(226, 232, 240);
+  --audience-step-bg: rgb(248, 250, 252);
+  --audience-step-hover-bg: rgb(241, 245, 249);
+  --audience-step-fg: rgb(30, 41, 59);
+  --audience-step-index: rgb(100, 116, 139);
+  --audience-badge-border: rgba(75, 141, 255, 0.18);
+  --audience-badge-bg: rgba(75, 141, 255, 0.08);
+  --audience-badge-fg: #4b8dff;
+}
+
+.cases-theme {
+  --cases-section-bg: #02040e;
+  --cases-section-fg: #ffffff;
+  --cases-shell-border: rgba(255, 255, 255, 0.1);
+  --cases-shell-bg: linear-gradient(180deg, rgba(11, 18, 32, 0.96) 0%, rgba(5, 8, 22, 0.96) 100%);
+  --cases-shell-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+  --cases-card-border: rgba(255, 255, 255, 0.1);
+  --cases-card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --cases-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  --cases-badge-border: rgba(114, 166, 255, 0.18);
+  --cases-badge-bg: rgba(114, 166, 255, 0.1);
+  --cases-badge-fg: #8cb7ff;
+  --cases-muted: rgba(255, 255, 255, 0.42);
+  --cases-muted-soft: rgba(255, 255, 255, 0.62);
+  --cases-overlay: linear-gradient(180deg, rgba(2, 6, 23, 0) 0%, rgba(2, 6, 23, 0.52) 100%);
+  --cases-stat-border: rgba(255, 255, 255, 0.1);
+  --cases-stat-bg: rgba(255, 255, 255, 0.03);
+  --cases-divider: rgba(255, 255, 255, 0.06);
+  --cases-chip-border: rgba(255, 255, 255, 0.1);
+  --cases-chip-bg: rgba(255, 255, 255, 0.04);
+  --cases-chip-fg: rgba(255, 255, 255, 0.76);
+  --cases-filter-border: rgba(255, 255, 255, 0.1);
+  --cases-filter-bg: rgba(255, 255, 255, 0.04);
+  --cases-filter-fg: rgba(255, 255, 255, 0.45);
+  --cases-button-border: rgba(255, 255, 255, 0.1);
+  --cases-button-bg: rgba(255, 255, 255, 0.05);
+  --cases-button-hover-bg: rgba(255, 255, 255, 0.08);
+  --cases-button-fg: rgba(255, 255, 255, 0.88);
+  --cases-trust-panel-border: rgba(255, 255, 255, 0.1);
+  --cases-trust-panel-bg: rgba(255, 255, 255, 0.03);
+  --cases-trust-icon-border: rgba(255, 255, 255, 0.1);
+  --cases-trust-icon-bg: rgba(255, 255, 255, 0.04);
+  --cases-trust-icon-fg: rgba(255, 255, 255, 0.55);
+  --cases-trust-overlay: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+}
+
+html[data-theme="light"] .cases-theme {
+  --cases-section-bg: #f6f8fc;
+  --cases-section-fg: #0f172a;
+  --cases-shell-border: rgb(226, 232, 240);
+  --cases-shell-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.94) 100%);
+  --cases-shell-shadow: 0 20px 80px rgba(15, 23, 42, 0.06);
+  --cases-card-border: rgb(226, 232, 240);
+  --cases-card-bg: #ffffff;
+  --cases-card-shadow: 0 12px 36px rgba(15, 23, 42, 0.06);
+  --cases-badge-border: rgba(75, 141, 255, 0.16);
+  --cases-badge-bg: rgba(75, 141, 255, 0.08);
+  --cases-badge-fg: #2563eb;
+  --cases-muted: rgb(100, 116, 139);
+  --cases-muted-soft: rgb(71, 85, 105);
+  --cases-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(15, 23, 42, 0.18) 100%);
+  --cases-stat-border: rgb(226, 232, 240);
+  --cases-stat-bg: rgba(248, 250, 252, 0.9);
+  --cases-divider: rgba(226, 232, 240, 0.8);
+  --cases-chip-border: rgb(226, 232, 240);
+  --cases-chip-bg: rgb(248, 250, 252);
+  --cases-chip-fg: rgb(51, 65, 85);
+  --cases-filter-border: rgb(226, 232, 240);
+  --cases-filter-bg: rgb(248, 250, 252);
+  --cases-filter-fg: rgb(100, 116, 139);
+  --cases-button-border: rgb(226, 232, 240);
+  --cases-button-bg: rgb(248, 250, 252);
+  --cases-button-hover-bg: rgb(241, 245, 249);
+  --cases-button-fg: rgb(51, 65, 85);
+  --cases-trust-panel-border: rgb(226, 232, 240);
+  --cases-trust-panel-bg: rgba(248, 250, 252, 0.7);
+  --cases-trust-icon-border: rgb(226, 232, 240);
+  --cases-trust-icon-bg: #ffffff;
+  --cases-trust-icon-fg: rgb(100, 116, 139);
+  --cases-trust-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 100%);
+}
+
+.contact-theme {
+  --contact-section-bg: #02040e;
+  --contact-section-fg: #ffffff;
+  --contact-shell-border: rgba(255, 255, 255, 0.1);
+  --contact-shell-bg: linear-gradient(180deg, rgba(7, 13, 25, 0.96) 0%, rgba(3, 7, 17, 0.98) 100%);
+  --contact-shell-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+  --contact-overlay: linear-gradient(90deg, #02040e 0%, #02040e 42%, rgba(2, 4, 14, 0.56) 62%, rgba(2, 4, 14, 0.12) 100%);
+  --contact-muted: rgba(255, 255, 255, 0.62);
+  --contact-chip-border: rgba(255, 255, 255, 0.1);
+  --contact-chip-bg: rgba(255, 255, 255, 0.04);
+  --contact-chip-fg: rgba(255, 255, 255, 0.8);
+  --contact-secondary-border: rgba(255, 255, 255, 0.1);
+  --contact-secondary-bg: rgba(255, 255, 255, 0.04);
+  --contact-secondary-hover-bg: rgba(255, 255, 255, 0.08);
+  --contact-secondary-fg: #ffffff;
+  --contact-panel-border: rgba(255, 255, 255, 0.1);
+  --contact-panel-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --contact-panel-shadow: none;
+  --contact-small-muted: rgba(255, 255, 255, 0.38);
+  --contact-card-border: rgba(255, 255, 255, 0.1);
+  --contact-card-bg: rgba(255, 255, 255, 0.04);
+  --contact-card-fg: rgba(255, 255, 255, 0.76);
+}
+
+html[data-theme="light"] .contact-theme {
+  --contact-section-bg: #f6f8fc;
+  --contact-section-fg: #0f172a;
+  --contact-shell-border: rgb(226, 232, 240);
+  --contact-shell-bg: #ffffff;
+  --contact-shell-shadow: 0 22px 80px rgba(15, 23, 42, 0.06);
+  --contact-overlay: linear-gradient(90deg, #ffffff 0%, #ffffff 38%, rgba(255, 255, 255, 0.52) 58%, rgba(255, 255, 255, 0.08) 100%);
+  --contact-muted: rgb(71, 85, 105);
+  --contact-chip-border: rgb(226, 232, 240);
+  --contact-chip-bg: #ffffff;
+  --contact-chip-fg: rgb(51, 65, 85);
+  --contact-secondary-border: rgb(226, 232, 240);
+  --contact-secondary-bg: #ffffff;
+  --contact-secondary-hover-bg: rgb(248, 250, 252);
+  --contact-secondary-fg: rgb(30, 41, 59);
+  --contact-panel-border: rgb(226, 232, 240);
+  --contact-panel-bg: rgba(255, 255, 255, 0.92);
+  --contact-panel-shadow: 0 18px 40px rgba(15, 23, 42, 0.06);
+  --contact-small-muted: rgb(148, 163, 184);
+  --contact-card-border: rgb(226, 232, 240);
+  --contact-card-bg: rgb(248, 250, 252);
+  --contact-card-fg: rgb(51, 65, 85);
+}
+
+.footer-theme {
+  --footer-border: rgba(255, 255, 255, 0.1);
+  --footer-bg: #02040e;
+  --footer-fg: #ffffff;
+  --footer-muted: rgba(255, 255, 255, 0.6);
+  --footer-soft-muted: rgba(255, 255, 255, 0.5);
+  --footer-subtle: rgba(255, 255, 255, 0.4);
+  --footer-toggle-track: rgba(255, 255, 255, 0.12);
+  --footer-toggle-label: rgba(255, 255, 255, 0.7);
+}
+
+html[data-theme="light"] .footer-theme {
+  --footer-border: rgb(226, 232, 240);
+  --footer-bg: #f6f8fc;
+  --footer-fg: #0f172a;
+  --footer-muted: rgb(71, 85, 105);
+  --footer-soft-muted: rgb(100, 116, 139);
+  --footer-subtle: rgb(100, 116, 139);
+  --footer-toggle-track: #4b8dff;
+  --footer-toggle-label: rgb(71, 85, 105);
+}
+
+.pricing-modal-theme {
+  --pricing-overlay: rgba(2, 6, 23, 0.72);
+  --pricing-modal-border: rgba(255, 255, 255, 0.1);
+  --pricing-modal-bg: linear-gradient(180deg, rgba(10, 14, 26, 0.98) 0%, rgba(5, 8, 18, 0.98) 100%);
+  --pricing-modal-fg: #ffffff;
+  --pricing-modal-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --pricing-card-border: rgba(255, 255, 255, 0.1);
+  --pricing-card-bg: rgba(255, 255, 255, 0.04);
+  --pricing-muted: rgba(255, 255, 255, 0.6);
+  --pricing-close-border: rgba(255, 255, 255, 0.1);
+  --pricing-close-bg: rgba(255, 255, 255, 0.05);
+  --pricing-close-hover-bg: rgba(255, 255, 255, 0.08);
+  --pricing-close-fg: rgba(255, 255, 255, 0.8);
+  --pricing-panel-border: rgba(255, 255, 255, 0.1);
+  --pricing-panel-bg: rgba(255, 255, 255, 0.03);
+  --pricing-table-head-bg: rgba(255, 255, 255, 0.04);
+  --pricing-table-head-fg: rgba(255, 255, 255, 0.42);
+  --pricing-row-border: rgba(255, 255, 255, 0.1);
+  --pricing-row-bg: transparent;
+  --pricing-row-fg: rgba(255, 255, 255, 0.84);
+  --pricing-note: rgba(255, 255, 255, 0.52);
+  --pricing-cta-border: rgba(255, 255, 255, 0.1);
+  --pricing-cta-bg: linear-gradient(180deg, rgba(75, 141, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+html[data-theme="light"] .pricing-modal-theme {
+  --pricing-overlay: rgba(15, 23, 42, 0.45);
+  --pricing-modal-border: rgb(226, 232, 240);
+  --pricing-modal-bg: #ffffff;
+  --pricing-modal-fg: #0f172a;
+  --pricing-modal-shadow: 0 30px 80px rgba(15, 23, 42, 0.18);
+  --pricing-card-border: rgb(226, 232, 240);
+  --pricing-card-bg: rgba(248, 250, 252, 0.8);
+  --pricing-muted: rgb(71, 85, 105);
+  --pricing-close-border: rgb(226, 232, 240);
+  --pricing-close-bg: rgb(248, 250, 252);
+  --pricing-close-hover-bg: rgb(241, 245, 249);
+  --pricing-close-fg: rgb(51, 65, 85);
+  --pricing-panel-border: rgb(226, 232, 240);
+  --pricing-panel-bg: rgba(248, 250, 252, 0.8);
+  --pricing-table-head-bg: rgb(241, 245, 249);
+  --pricing-table-head-fg: rgb(100, 116, 139);
+  --pricing-row-border: rgb(226, 232, 240);
+  --pricing-row-bg: #ffffff;
+  --pricing-row-fg: rgb(30, 41, 59);
+  --pricing-note: rgb(100, 116, 139);
+  --pricing-cta-border: rgb(226, 232, 240);
+  --pricing-cta-bg: #f7fbff;
+}
+
+.services-modal-theme {
+  --services-modal-overlay: rgba(2, 6, 23, 0.72);
+  --services-modal-border: rgba(255, 255, 255, 0.1);
+  --services-modal-bg: linear-gradient(180deg, rgba(10, 14, 26, 0.98) 0%, rgba(5, 8, 18, 0.98) 100%);
+  --services-modal-fg: #ffffff;
+  --services-modal-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --services-modal-card-border: rgba(255, 255, 255, 0.1);
+  --services-modal-card-bg: rgba(255, 255, 255, 0.04);
+  --services-modal-muted: rgba(255, 255, 255, 0.6);
+  --services-modal-close-border: rgba(255, 255, 255, 0.1);
+  --services-modal-close-bg: rgba(255, 255, 255, 0.05);
+  --services-modal-close-hover-bg: rgba(255, 255, 255, 0.08);
+  --services-modal-close-fg: rgba(255, 255, 255, 0.8);
+  --services-modal-cta-border: rgba(255, 255, 255, 0.1);
+  --services-modal-cta-bg: linear-gradient(180deg, rgba(75, 141, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+}
+
+html[data-theme="light"] .services-modal-theme {
+  --services-modal-overlay: rgba(15, 23, 42, 0.45);
+  --services-modal-border: rgb(226, 232, 240);
+  --services-modal-bg: #ffffff;
+  --services-modal-fg: #0f172a;
+  --services-modal-shadow: 0 30px 80px rgba(15, 23, 42, 0.18);
+  --services-modal-card-border: rgb(226, 232, 240);
+  --services-modal-card-bg: rgba(248, 250, 252, 0.8);
+  --services-modal-muted: rgb(71, 85, 105);
+  --services-modal-close-border: rgb(226, 232, 240);
+  --services-modal-close-bg: rgb(248, 250, 252);
+  --services-modal-close-hover-bg: rgb(241, 245, 249);
+  --services-modal-close-fg: rgb(51, 65, 85);
+  --services-modal-cta-border: rgb(226, 232, 240);
+  --services-modal-cta-bg: #f7fbff;
+}
+
+.cases-modal-theme {
+  --cases-modal-overlay: rgba(2, 6, 23, 0.72);
+  --cases-modal-border: rgba(255, 255, 255, 0.1);
+  --cases-modal-bg: linear-gradient(180deg, rgba(10, 14, 26, 0.98) 0%, rgba(5, 8, 18, 0.98) 100%);
+  --cases-modal-fg: #ffffff;
+  --cases-modal-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --cases-modal-card-border: rgba(255, 255, 255, 0.1);
+  --cases-modal-card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.02) 100%);
+  --cases-modal-stat-border: rgba(255, 255, 255, 0.1);
+  --cases-modal-stat-bg: rgba(255, 255, 255, 0.03);
+  --cases-modal-badge-border: rgba(114, 166, 255, 0.18);
+  --cases-modal-badge-bg: rgba(114, 166, 255, 0.1);
+  --cases-modal-badge-fg: #8cb7ff;
+  --cases-modal-muted: rgba(255, 255, 255, 0.42);
+  --cases-modal-muted-soft: rgba(255, 255, 255, 0.62);
+  --cases-modal-cta-border: rgba(255, 255, 255, 0.1);
+  --cases-modal-cta-bg: linear-gradient(180deg, rgba(75, 141, 255, 0.12) 0%, rgba(255, 255, 255, 0.03) 100%);
+  --cases-modal-close-border: rgba(255, 255, 255, 0.1);
+  --cases-modal-close-bg: rgba(255, 255, 255, 0.05);
+  --cases-modal-close-hover-bg: rgba(255, 255, 255, 0.08);
+  --cases-modal-close-fg: rgba(255, 255, 255, 0.8);
+  --cases-modal-header-border: rgba(255, 255, 255, 0.1);
+  --cases-modal-overlay-image: linear-gradient(180deg, rgba(2, 6, 23, 0) 0%, rgba(2, 6, 23, 0.52) 100%);
+}
+
+html[data-theme="light"] .cases-modal-theme {
+  --cases-modal-overlay: rgba(15, 23, 42, 0.45);
+  --cases-modal-border: rgb(226, 232, 240);
+  --cases-modal-bg: #ffffff;
+  --cases-modal-fg: #0f172a;
+  --cases-modal-shadow: 0 30px 80px rgba(15, 23, 42, 0.18);
+  --cases-modal-card-border: rgb(226, 232, 240);
+  --cases-modal-card-bg: #ffffff;
+  --cases-modal-stat-border: rgb(226, 232, 240);
+  --cases-modal-stat-bg: rgb(248, 250, 252);
+  --cases-modal-badge-border: rgba(75, 141, 255, 0.15);
+  --cases-modal-badge-bg: rgba(75, 141, 255, 0.08);
+  --cases-modal-badge-fg: #2563eb;
+  --cases-modal-muted: rgb(100, 116, 139);
+  --cases-modal-muted-soft: rgb(71, 85, 105);
+  --cases-modal-cta-border: rgb(226, 232, 240);
+  --cases-modal-cta-bg: #f7fbff;
+  --cases-modal-close-border: rgb(226, 232, 240);
+  --cases-modal-close-bg: rgb(248, 250, 252);
+  --cases-modal-close-hover-bg: rgb(241, 245, 249);
+  --cases-modal-close-fg: rgb(51, 65, 85);
+  --cases-modal-header-border: rgb(226, 232, 240);
+  --cases-modal-overlay-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(15, 23, 42, 0.18) 100%);
+}
+
+.theme-only-light {
+  display: none;
+}
+
+html[data-theme="light"] .theme-only-light {
+  display: block;
+}
+
+html[data-theme="light"] .theme-only-dark {
+  display: none;
+}

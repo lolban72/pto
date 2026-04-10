@@ -1,24 +1,13 @@
-"use client";
-
 import {
   company,
   contactDetails,
-  footerNotes,
   navigationItems,
 } from "../lib/site-content";
-import { useTheme } from "./theme-provider";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Footer() {
-  const { isLight, toggleTheme } = useTheme();
-
   return (
-    <footer
-      className={`relative overflow-hidden border-t ${
-        isLight
-          ? "border-slate-200 bg-[#f6f8fc] text-slate-950"
-          : "border-white/10 bg-[#02040e] text-white"
-      }`}
-    >
+    <footer className="footer-theme relative overflow-hidden border-t border-[var(--footer-border)] bg-[var(--footer-bg)] text-[var(--footer-fg)]">
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[10%] top-[-40px] h-[140px] w-[140px] rounded-full bg-[#4b8dff]/10 blur-3xl" />
         <div className="absolute right-[10%] bottom-[-60px] h-[180px] w-[180px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
@@ -31,20 +20,14 @@ export default function Footer() {
               {company.name}
             </div>
 
-            <p
-              className={`mt-4 max-w-[360px] text-[14px] leading-7 ${
-                isLight ? "text-slate-600" : "text-white/60"
-              }`}
-            >
+            <p className="mt-4 max-w-[360px] text-[14px] leading-7 text-[var(--footer-muted)]">
               {company.description}
             </p>
-
-            
           </div>
 
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.18em] opacity-70">
-              Навигация
+              РќР°РІРёРіР°С†РёСЏ
             </div>
 
             <div className="mt-4 flex flex-col gap-3 text-[14px]">
@@ -64,7 +47,7 @@ export default function Footer() {
 
           <div>
             <div className="font-mono text-[11px] uppercase tracking-[0.18em] opacity-70">
-              Контакты
+              РљРѕРЅС‚Р°РєС‚С‹
             </div>
 
             <div className="mt-4 space-y-3 text-[14px]">
@@ -74,10 +57,10 @@ export default function Footer() {
               <a href={contactDetails.emailHref} className="block">
                 {contactDetails.emailLabel}
               </a>
-              <div className={`${isLight ? "text-slate-500" : "text-white/50"}`}>
+              <div className="text-[var(--footer-soft-muted)]">
                 {contactDetails.location}
               </div>
-              <div className={`${isLight ? "text-slate-500" : "text-white/50"}`}>
+              <div className="text-[var(--footer-soft-muted)]">
                 {contactDetails.hours}
               </div>
             </div>
@@ -86,52 +69,17 @@ export default function Footer() {
           <div className="flex flex-col gap-6">
             <div>
               <div className="font-mono text-[11px] uppercase tracking-[0.18em] opacity-70">
-                Тема
+                РўРµРјР°
               </div>
 
-              <label className="mt-4 inline-flex cursor-pointer items-center gap-4">
-                <input
-                  type="checkbox"
-                  className="peer sr-only"
-                  checked={isLight}
-                  onChange={toggleTheme}
-                />
-
-                <div
-                  className={`relative h-7 w-12 rounded-full transition ${
-                    isLight ? "bg-[#4b8dff]" : "bg-white/12"
-                  }`}
-                >
-                  <span
-                    className={`absolute left-1 top-1 h-5 w-5 rounded-full bg-white shadow transition ${
-                      isLight ? "translate-x-5" : "translate-x-0"
-                    }`}
-                  />
-                </div>
-
-                <span
-                  className={`text-[13px] ${
-                    isLight ? "text-slate-600" : "text-white/70"
-                  }`}
-                >
-                  Светлая тема
-                </span>
-              </label>
+              <ThemeToggle />
             </div>
-
-            
           </div>
         </div>
 
-        <div
-          className={`mt-10 flex flex-col gap-3 border-t pt-6 text-[12px] md:flex-row md:items-center md:justify-between ${
-            isLight
-              ? "border-slate-200 text-slate-500"
-              : "border-white/10 text-white/40"
-          }`}
-        >
-          <div>© {new Date().getFullYear()} {company.name}</div>
-          <div>Исполнительная документация, ПТО и сопровождение сдачи объектов</div>
+        <div className="mt-10 flex flex-col gap-3 border-t border-[var(--footer-border)] pt-6 text-[12px] text-[var(--footer-subtle)] md:flex-row md:items-center md:justify-between">
+          <div>В© {new Date().getFullYear()} {company.name}</div>
+          <div>РСЃРїРѕР»РЅРёС‚РµР»СЊРЅР°СЏ РґРѕРєСѓРјРµРЅС‚Р°С†РёСЏ, РџРўРћ Рё СЃРѕРїСЂРѕРІРѕР¶РґРµРЅРёРµ СЃРґР°С‡Рё РѕР±СЉРµРєС‚РѕРІ</div>
         </div>
       </div>
     </footer>

@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { ThemeProvider } from "../components/theme-provider";
 import { company } from "../lib/site-content";
 import "./globals.css";
 
@@ -43,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="ru" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex min-h-full flex-col bg-[#02040e] text-slate-950">
-        <ThemeProvider>{children}</ThemeProvider>
+        {children}
       </body>
     </html>
   );
