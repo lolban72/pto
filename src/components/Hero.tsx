@@ -142,16 +142,7 @@ export default function Hero() {
                   {heroContent.description}
                 </p>
 
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {company.sectors.map((item) => (
-                    <div
-                      key={item}
-                      className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] text-white/74 backdrop-blur-md"
-                    >
-                      {item}
-                    </div>
-                  ))}
-                </div>
+               
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <a
@@ -168,18 +159,6 @@ export default function Hero() {
                   >
                     Смотреть кейсы
                   </a>
-                </div>
-
-                <div className="mt-8 flex flex-wrap gap-3">
-                  {heroContent.pills.map((item) => (
-                    <div
-                      key={item}
-                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] text-white/72"
-                    >
-                      <CheckMini />
-                      {item}
-                    </div>
-                  ))}
                 </div>
               </div>
 
