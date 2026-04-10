@@ -24,7 +24,6 @@ export const navigationItems = [
 ] as const;
 
 export const heroContent = {
-  badge: "Аутсорсинг ПТО для девелоперов, генподрядчиков и подрядчиков",
   titleLines: [
     "Документация",
     "и сопровождение,",

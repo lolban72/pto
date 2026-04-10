@@ -98,13 +98,6 @@ export default function Hero() {
                     {contactDetails.hours}
                   </div>
                 </div>
-
-                <a
-                  href="#contacts"
-                  className="inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] px-5 text-[13px] font-medium text-white transition hover:bg-white/[0.09]"
-                >
-                  Обсудить объект
-                </a>
               </div>
 
               <button
@@ -124,7 +117,6 @@ export default function Hero() {
               <div className="max-w-[860px]">
                 <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#4b8dff]/26 bg-[#0b1f46]/72 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white/92 backdrop-blur-md md:px-5">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#4b8dff]" />
-                  <span className="truncate">{heroContent.badge}</span>
                 </div>
 
                 <h1 className="mt-7 text-[46px] font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:text-[62px] lg:text-[92px]">
