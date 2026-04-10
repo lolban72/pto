@@ -2,165 +2,174 @@
 
 import Image from "next/image";
 import { useRef, useState } from "react";
-import { useTheme } from "../components/theme-provider";
+import { audience, processSteps } from "../lib/site-content";
+import { useTheme } from "./theme-provider";
 import AudienceProcessModal from "./AudienceProcessModal";
-
-const audience = [
-  {
-    title: "Генподрядчики",
-    text: "Закрываем объём документации без перегрузки внутренней команды.",
-    icon: "/icons/2.png",
-  },
-  {
-    title: "Подрядчики",
-    text: "Подключаемся к объекту на любом этапе и доводим комплект до порядка.",
-    icon: "/icons/3.png",
-  },
-  {
-    title: "Технические заказчики",
-    text: "Готовим документы в понятном и проверяемом виде для согласования.",
-    icon: "/icons/4.png",
-  },
-];
-
-const steps = [
-  "Получаем исходные данные",
-  "Оцениваем объём задач",
-  "Согласовываем состав работ",
-  "Подключаем команду",
-  "Готовим комплект к сдаче",
-  "Сопровождаем результат",
-];
 
 export default function AudienceProcess() {
   const { isLight } = useTheme();
   const stepsRef = useRef<HTMLDivElement | null>(null);
   const [isAudienceModalOpen, setIsAudienceModalOpen] = useState(false);
 
-  const scrollSteps = (dir: "left" | "right") => {
-    if (!stepsRef.current) return;
+  const scrollSteps = (direction: "left" | "right") => {
+    if (!stepsRef.current) {
+      return;
+    }
 
     stepsRef.current.scrollBy({
-      left: dir === "right" ? 300 : -300,
+      left: direction === "right" ? 320 : -320,
       behavior: "smooth",
     });
   };
 
   const cardClass = isLight
-    ? "rounded-[22px] border border-slate-200 bg-white shadow-[0_14px_35px_rgba(15,23,42,0.06)] backdrop-blur-[18px]"
-    : "rounded-[22px] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.018)_100%)] shadow-[0_14px_35px_rgba(0,0,0,0.16)] backdrop-blur-[18px]";
+    ? "rounded-[28px] border border-slate-200 bg-white shadow-[0_16px_40px_rgba(15,23,42,0.06)]"
+    : "rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.018)_100%)] shadow-[0_16px_40px_rgba(0,0,0,0.18)]";
 
   return (
     <>
       <section
         id="audience"
-        className={`relative ${
-          isLight ? "bg-[#f4f8fc] text-slate-900" : "bg-[#02040e] text-white"
+        className={`relative overflow-hidden ${
+          isLight ? "bg-[#f4f8fc] text-slate-950" : "bg-[#02040e] text-white"
         }`}
       >
-        <div className="mx-auto max-w-[1680px] px-5 pb-16 pt-4 md:px-8 lg:px-10">
-          <div className="grid gap-4 lg:grid-cols-[230px_0.9fr_1.1fr]">
-            <div className={`${cardClass} flex flex-col justify-center p-5`}>
-              <h2 className="text-[30px] font-semibold leading-[0.98] tracking-[-0.03em]">
-                Для кого
-                <br />
-                мы работаем
-              </h2>
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-[16%] top-[10%] h-48 w-48 rounded-full bg-[#4b8dff]/10 blur-3xl" />
+          <div className="absolute right-[8%] bottom-[12%] h-56 w-56 rounded-full bg-[#7c3aed]/10 blur-3xl" />
+        </div>
 
+        <div className="relative mx-auto max-w-[1680px] px-5 py-8 md:px-8 lg:px-10">
+          <div className="mb-5">
+            <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#4b8dff]">
+              Кому и как подходим
+            </div>
+            <h2 className="mt-3 text-[34px] font-semibold leading-[0.94] tracking-[-0.05em] md:text-[48px]">
+              Формат работы,
+              <br />
+              который не создает хаос на объекте
+            </h2>
+          </div>
+
+          <div className="grid gap-4 xl:grid-cols-[320px_0.95fr_1.05fr]">
+            <div className={`${cardClass} p-6`}>
               <p
-                className={`mt-3 max-w-[170px] text-[12px] leading-5 ${
-                  isLight ? "text-slate-500" : "text-white/55"
+                className={`text-[15px] leading-7 ${
+                  isLight ? "text-slate-600" : "text-white/62"
                 }`}
               >
-                Помогаем закрыть каждый спорный и строительный процесс
+                Мы не просто готовим документы, а встраиваемся в рабочий ритм
+                проекта: определяем, кто что дает, где контрольная точка и как
+                комплект будет двигаться к проверке и сдаче.
               </p>
+
+              <div className="mt-6 grid gap-3">
+                {[
+                  "Понятная ответственность по разделам",
+                  "Прозрачный статус по замечаниям",
+                  "Минимум ручной координации со стороны заказчика",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className={`rounded-[20px] px-4 py-4 text-[14px] leading-6 ${
+                      isLight
+                        ? "border border-slate-200 bg-slate-50 text-slate-700"
+                        : "border border-white/10 bg-white/[0.04] text-white/76"
+                    }`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
 
               <button
                 type="button"
                 onClick={() => setIsAudienceModalOpen(true)}
-                className={`mt-6 inline-flex h-[38px] items-center rounded-full px-4 text-[13px] font-medium transition ${
+                className={`mt-6 inline-flex h-[44px] items-center rounded-full px-5 text-[14px] font-medium transition ${
                   isLight
                     ? "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
-                    : "border border-white/10 bg-white/[0.05] text-white/85 hover:bg-white/[0.08]"
+                    : "border border-white/10 bg-white/[0.05] text-white/88 hover:bg-white/[0.08]"
                 }`}
               >
-                Смотреть все
+                Смотреть весь процесс
                 <span className="ml-2">→</span>
               </button>
             </div>
 
-            <div className="min-w-0 grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-3 xl:grid-cols-1">
               {audience.map((item) => (
                 <article
                   key={item.title}
-                  className={`${cardClass} group flex flex-col rounded-[22px] pl-3 pr-3 pt-5 pb-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(75,141,255,0.12)]`}
+                  className={`${cardClass} group flex flex-col p-5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(75,141,255,0.14)]`}
                 >
-                  <div className="mb-2 flex h-18 w-18 items-center justify-center rounded-xl bg-[radial-gradient(circle,rgba(75,141,255,0.18)_0%,rgba(75,141,255,0.08)_40%,transparent_70%)] shadow-[0_0_25px_rgba(75,141,255,0.25)] transition duration-300 group-hover:shadow-[0_0_34px_rgba(75,141,255,0.4)]">
+                  <div className="flex h-[72px] w-[72px] items-center justify-center rounded-[22px] bg-[radial-gradient(circle,rgba(75,141,255,0.22)_0%,rgba(75,141,255,0.08)_45%,transparent_75%)] shadow-[0_0_30px_rgba(75,141,255,0.24)] transition duration-300 group-hover:shadow-[0_0_40px_rgba(75,141,255,0.4)]">
                     <Image
                       src={item.icon}
                       alt={item.title}
-                      width={52}
-                      height={52}
+                      width={56}
+                      height={56}
                       className="object-contain transition duration-300 group-hover:scale-105"
                     />
                   </div>
 
-                  <div
-                    className={`text-[14px] font-semibold leading-5 ${
-                      isLight ? "text-slate-900" : "text-white"
-                    }`}
-                  >
+                  <h3 className="mt-5 text-[20px] font-semibold leading-[1.05] tracking-[-0.03em]">
                     {item.title}
-                  </div>
+                  </h3>
 
-                  <div
-                    className={`mt-2 mr-3 text-[12px] leading-5 ${
-                      isLight ? "text-slate-600" : "text-white/58"
+                  <p
+                    className={`mt-3 text-[14px] leading-7 ${
+                      isLight ? "text-slate-600" : "text-white/62"
                     }`}
                   >
                     {item.text}
-                  </div>
+                  </p>
                 </article>
               ))}
             </div>
 
-            <div className={`${cardClass} min-w-0 p-5`}>
+            <div className={`${cardClass} min-w-0 p-6`}>
               <div className="flex items-start justify-between gap-4">
-                <div className="max-w-[340px]">
-                  <h2 className="text-[30px] font-semibold leading-[0.98] tracking-[-0.03em]">
-                    Как мы работаем
-                  </h2>
-
+                <div className="max-w-[420px]">
+                  <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#4b8dff]">
+                    6 шагов
+                  </div>
+                  <h3 className="mt-3 text-[30px] font-semibold leading-[0.96] tracking-[-0.04em]">
+                    Как мы доводим
+                    <br />
+                    комплект до результата
+                  </h3>
                   <p
-                    className={`mt-1 text-[12px] leading-5 ${
-                      isLight ? "text-slate-500" : "text-white/55"
+                    className={`mt-3 text-[14px] leading-7 ${
+                      isLight ? "text-slate-600" : "text-white/62"
                     }`}
                   >
-                    Простой и прозрачный процесс в 6 шагов
+                    Процесс прозрачен с первого дня: от разбора исходных данных
+                    до передачи комплекта на проверку и сопровождения замечаний.
                   </p>
                 </div>
 
-                <div className="hidden shrink-0 md:flex items-center gap-2">
+                <div className="hidden shrink-0 items-center gap-2 md:flex">
                   <button
+                    type="button"
                     onClick={() => scrollSteps("left")}
-                    className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-full transition ${
                       isLight
                         ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                        : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                        : "border border-white/10 bg-white/[0.05] text-white/72 hover:bg-white/[0.09]"
                     }`}
-                    aria-label="Назад"
+                    aria-label="Прокрутить этапы влево"
                   >
                     ←
                   </button>
-
                   <button
+                    type="button"
                     onClick={() => scrollSteps("right")}
-                    className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                    className={`flex h-10 w-10 items-center justify-center rounded-full transition ${
                       isLight
                         ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                        : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                        : "border border-white/10 bg-white/[0.05] text-white/72 hover:bg-white/[0.09]"
                     }`}
-                    aria-label="Вперёд"
+                    aria-label="Прокрутить этапы вправо"
                   >
                     →
                   </button>
@@ -169,52 +178,44 @@ export default function AudienceProcess() {
 
               <div
                 ref={stepsRef}
-                className="mt-3 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                className="mt-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
               >
-                <div
-                  className="
-                    grid grid-flow-col gap-4
-                    auto-cols-[85%]
-                    md:auto-cols-[calc((100%-0.75rem)/2)]
-                    xl:auto-cols-[calc((100%-18rem)/3)]
-                  "
-                >
-                  {steps.map((step, index) => (
+                <div className="grid grid-flow-col gap-4 auto-cols-[86%] md:auto-cols-[calc((100%-1rem)/2)] xl:auto-cols-[calc((100%-2rem)/3)]">
+                  {processSteps.map((step, index) => (
                     <article
-                      key={step}
-                      className={`snap-start rounded-[18px] p-4 transition duration-300 ${
+                      key={`${index + 1}-${step}`}
+                      className={`rounded-[22px] p-5 ${
                         isLight
-                          ? "border border-slate-200 bg-slate-50 hover:bg-slate-100"
-                          : "border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.018)_100%)] hover:bg-white/[0.06]"
+                          ? "border border-slate-200 bg-slate-50"
+                          : "border border-white/10 bg-white/[0.04]"
                       }`}
                     >
-                      <div className="flex">
+                      <div className="flex items-center gap-3">
                         <div
-                          className={`flex h-8 w-8 items-center justify-center rounded-xl transition duration-300 ${
+                          className={`flex h-10 w-10 items-center justify-center rounded-[14px] ${
                             isLight
                               ? "border border-[#4b8dff]/18 bg-[#4b8dff]/8 text-[#4b8dff]"
-                              : "border border-[#4b8dff]/20 bg-[#4b8dff]/10 text-[#6ea3ff]"
+                              : "border border-[#4b8dff]/20 bg-[#4b8dff]/10 text-[#8cb7ff]"
                           }`}
                         >
                           <CheckMini />
                         </div>
-
                         <div
-                          className={`ml-3 mt-2 text-[12px] font-medium ${
-                            isLight ? "text-slate-500" : "text-white/90"
+                          className={`font-mono text-[12px] uppercase tracking-[0.18em] ${
+                            isLight ? "text-slate-400" : "text-white/38"
                           }`}
                         >
-                          {String(index + 1).padStart(2, "0")}
+                          Этап {String(index + 1).padStart(2, "0")}
                         </div>
                       </div>
 
-                      <div
-                        className={`mt-2 text-[12px] font-medium leading-5 whitespace-pre-line ${
-                          isLight ? "text-slate-800" : "text-white/90"
+                      <p
+                        className={`mt-4 text-[14px] leading-7 ${
+                          isLight ? "text-slate-700" : "text-white/78"
                         }`}
                       >
                         {step}
-                      </div>
+                      </p>
                     </article>
                   ))}
                 </div>
@@ -222,25 +223,26 @@ export default function AudienceProcess() {
 
               <div className="mt-4 flex justify-end gap-2 md:hidden">
                 <button
+                  type="button"
                   onClick={() => scrollSteps("left")}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                  className={`flex h-10 w-10 items-center justify-center rounded-full transition ${
                     isLight
                       ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                      : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                      : "border border-white/10 bg-white/[0.05] text-white/72 hover:bg-white/[0.09]"
                   }`}
-                  aria-label="Назад"
+                  aria-label="Прокрутить этапы влево"
                 >
                   ←
                 </button>
-
                 <button
+                  type="button"
                   onClick={() => scrollSteps("right")}
-                  className={`flex h-8 w-8 items-center justify-center rounded-full transition ${
+                  className={`flex h-10 w-10 items-center justify-center rounded-full transition ${
                     isLight
                       ? "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                      : "border border-white/10 bg-white/[0.04] text-white/75 hover:bg-white/[0.07]"
+                      : "border border-white/10 bg-white/[0.05] text-white/72 hover:bg-white/[0.09]"
                   }`}
-                  aria-label="Вперёд"
+                  aria-label="Прокрутить этапы вправо"
                 >
                   →
                 </button>
@@ -253,10 +255,9 @@ export default function AudienceProcess() {
       <AudienceProcessModal
         isOpen={isAudienceModalOpen}
         onClose={() => setIsAudienceModalOpen(false)}
-        onOpenContacts={() => {}}
         audience={audience}
-        steps={steps}
-      />  
+        steps={processSteps}
+      />
     </>
   );
 }

@@ -1,21 +1,38 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "../components/theme-provider";
+import { company } from "../lib/site-content";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "ПТО-ЮГРА",
-  description: "Исполнительная документация и сопровождение строительства",
+  title: {
+    default: company.name,
+    template: `%s | ${company.name}`,
+  },
+  description: company.description,
+  applicationName: company.name,
+  keywords: [
+    "исполнительная документация",
+    "аутсорсинг ПТО",
+    "сопровождение строительства",
+    "сдача объекта",
+    "ПТО-ЮГРА",
+  ],
+  openGraph: {
+    title: company.name,
+    description: company.description,
+    type: "website",
+    locale: "ru_RU",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: company.name,
+    description: company.description,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#050b16",
+  colorScheme: "dark light",
 };
 
 export default function RootLayout({
@@ -24,11 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-[#02040e] flex flex-col">
+    <html lang="ru" className="h-full antialiased" suppressHydrationWarning>
+      <body className="flex min-h-full flex-col bg-[#02040e] text-slate-950">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

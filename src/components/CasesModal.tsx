@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo } from "react";
 import Image from "next/image";
-import { useTheme } from "../components/theme-provider";
+import { useTheme } from "./theme-provider";
 
 type CaseStat = {
   value: string;
@@ -13,29 +13,31 @@ type CaseItem = {
   title: string;
   text: string;
   image: string;
-  stats: CaseStat[];
+  stats: ReadonlyArray<CaseStat>;
 };
 
 type CasesModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  cases: CaseItem[];
-  onOpenContacts?: () => void;
+  cases: ReadonlyArray<CaseItem>;
 };
 
 export default function CasesModal({
   isOpen,
   onClose,
   cases,
-  onOpenContacts,
 }: CasesModalProps) {
   const { isLight } = useTheme();
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      return;
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -82,7 +84,9 @@ export default function CasesModal({
     };
   }, [isLight]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   return (
     <div
@@ -91,7 +95,7 @@ export default function CasesModal({
     >
       <div
         className={`${theme.modal} relative flex max-h-[90vh] w-full max-w-[1320px] flex-col rounded-[30px]`}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
       >
         <div
           className={`flex items-start justify-between gap-4 px-6 py-5 md:px-8 ${
@@ -99,7 +103,7 @@ export default function CasesModal({
           }`}
         >
           <div>
-            <div className="text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
+            <div className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
               Реальные проекты
             </div>
 
@@ -107,15 +111,10 @@ export default function CasesModal({
               Кейсы и выполненные задачи
             </h2>
 
-            <p
-              className={`mt-3 max-w-[800px] text-[14px] leading-6 ${
-                theme.mutedSoft
-              }`}
-            >
-              Здесь собраны объекты, на которых мы вели исполнительную
-              документацию, восстанавливали комплекты, сопровождали ремонтные и
-              строительные работы и помогали пройти этапы сдачи без лишних
-              замечаний.
+            <p className={`mt-3 max-w-[800px] text-[14px] leading-6 ${theme.mutedSoft}`}>
+              Здесь собраны объекты, где мы вели исполнительную документацию,
+              восстанавливали комплект, сопровождали ремонтные и строительные
+              работы и помогали пройти этапы сдачи без затяжных замечаний.
             </p>
           </div>
 
@@ -123,9 +122,9 @@ export default function CasesModal({
             type="button"
             onClick={onClose}
             aria-label="Закрыть"
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[20px] transition ${theme.close}`}
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${theme.close}`}
           >
-            ✕
+            <CloseIcon />
           </button>
         </div>
 
@@ -199,26 +198,19 @@ export default function CasesModal({
                 </div>
 
                 <p className={`mt-2 max-w-[780px] text-[14px] leading-6 ${theme.mutedSoft}`}>
-                  Подключимся к проекту, оценим объём задач, подготовим понятный
-                  план работ и возьмём на себя сопровождение исполнительной
-                  документации под ваш объект.
+                  Подключимся к проекту, оценим объем задач, подготовим понятный
+                  план работ и возьмем на себя сопровождение документации под ваш
+                  объект.
                 </p>
               </div>
 
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onOpenContacts?.();
-                }}
-                className={`inline-flex h-[44px] items-center justify-center rounded-full px-5 text-[14px] font-medium transition ${
-                  isLight
-                    ? "bg-[#4b8dff] text-white hover:bg-[#3b7df0]"
-                    : "bg-[#4b8dff] text-white hover:bg-[#5c98ff]"
-                }`}
+              <a
+                href="#contacts"
+                onClick={onClose}
+                className="inline-flex h-[44px] items-center justify-center rounded-full bg-[#4b8dff] px-5 text-[14px] font-medium text-white transition hover:bg-[#3b7df0]"
               >
                 Связаться
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -248,6 +240,19 @@ function StatusMini() {
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path
+        d="M5 5L15 15M15 5L5 15"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
       />
     </svg>
   );

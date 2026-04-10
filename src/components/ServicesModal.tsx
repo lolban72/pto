@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { useTheme } from "../components/theme-provider";
+import { useTheme } from "./theme-provider";
 
 type ServiceItem = {
   title: string;
@@ -13,7 +13,7 @@ type ServiceItem = {
 type ServicesModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  services: ServiceItem[];
+  services: ReadonlyArray<ServiceItem>;
 };
 
 export default function ServicesModal({
@@ -24,10 +24,14 @@ export default function ServicesModal({
   const { isLight } = useTheme();
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      return;
+    }
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -39,7 +43,9 @@ export default function ServicesModal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   const overlayClass = isLight
     ? "bg-[rgba(15,23,42,0.45)]"
@@ -60,11 +66,11 @@ export default function ServicesModal({
     >
       <div
         className={`${modalClass} relative max-h-[90vh] w-full max-w-[1180px] overflow-hidden rounded-[30px]`}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4 border-b border-white/10 px-6 py-5 md:px-8">
           <div>
-            <div className="text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
+            <div className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
               Все услуги
             </div>
 
@@ -77,23 +83,23 @@ export default function ServicesModal({
                 isLight ? "text-slate-600" : "text-white/60"
               }`}
             >
-              Закрываем задачи по исполнительной документации, сопровождению
-              объектов, восстановлению комплектов и подготовке к сдаче. Работаем
-              аккуратно, в срок и с учётом требований по СП, ГОСТ и внутренним
-              регламентам заказчика.
+              Закрываем исполнительную документацию, производственные разделы,
+              восстановление комплекта и подготовку к сдаче. Формат подключения
+              подбираем под ваш объект, сроки и текущий уровень хаоса.
             </p>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
             aria-label="Закрыть"
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[20px] transition ${
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
               isLight
                 ? "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
                 : "border border-white/10 bg-white/[0.05] text-white/80 hover:bg-white/[0.08]"
             }`}
           >
-            ✕
+            <CloseIcon />
           </button>
         </div>
 
@@ -139,7 +145,7 @@ export default function ServicesModal({
             <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
               <div>
                 <div className="text-[22px] font-semibold leading-tight md:text-[26px]">
-                  Нужна услуга под ваш объект?
+                  Нужен формат под ваш объект?
                 </div>
 
                 <p
@@ -147,20 +153,15 @@ export default function ServicesModal({
                     isLight ? "text-slate-600" : "text-white/60"
                   }`}
                 >
-                  Подберём формат работы: разовая подготовка документации,
-                  частичное ведение разделов или полноценный аутсорсинг ПТО под
-                  ваш объём задач.
+                  Подберем конфигурацию работ: разовая подготовка комплекта,
+                  ведение отдельных разделов или полноценный аутсорсинг ПТО.
                 </p>
               </div>
 
               <a
                 href="#contacts"
                 onClick={onClose}
-                className={`inline-flex h-[44px] items-center justify-center rounded-full px-5 text-[14px] font-medium transition ${
-                  isLight
-                    ? "bg-[#4b8dff] text-white hover:bg-[#3b7df0]"
-                    : "bg-[#4b8dff] text-white hover:bg-[#5c98ff]"
-                }`}
+                className="inline-flex h-[44px] items-center justify-center rounded-full bg-[#4b8dff] px-5 text-[14px] font-medium text-white transition hover:bg-[#3b7df0]"
               >
                 Связаться
               </a>
@@ -169,5 +170,18 @@ export default function ServicesModal({
         </div>
       </div>
     </div>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path
+        d="M5 5L15 15M15 5L5 15"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }

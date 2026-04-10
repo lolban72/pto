@@ -2,581 +2,370 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-const menuItems = [
-  { label: "Услуги", href: "#services", type: "link" },
-  { label: "Кейсы", href: "#cases", type: "link" },
-  { label: "О компании", href: "#about", type: "modal-about" },
-  { label: "Контакты", href: "#contact", type: "modal-contact" },
-] as const;
-
-const features = [
-  {
-    title: "По СП и ГОСТ",
-    text: "Точно под нормативам и требованиям",
-    icon: <DocIcon />,
-  },
-  {
-    title: "Без срывов сроков",
-    text: "Выстроенная работа так, чтобы документация не тормозила объект",
-    icon: <ClockIcon />,
-  },
-  {
-    title: "Под ключ",
-    text: "От отдельного раздела до полного сопровождения",
-    icon: <LayersIcon />,
-  },
-];
-
-const stats = [
-  { value: "7+", label: "лет на рынке" },
-  { value: "500+", label: "объектов сдано" },
-  { value: "30+", label: "специалистов\nв команде" },
-];
+import {
+  company,
+  contactDetails,
+  heroContent,
+  navigationItems,
+  trustFeatures,
+  trustStats,
+} from "../lib/site-content";
 
 export default function Hero() {
-  const [aboutOpen, setAboutOpen] = useState(false);
-  const [contactOpen, setContactOpen] = useState(false);
-
-  const anyModalOpen = aboutOpen || contactOpen;
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (!anyModalOpen) return;
+    if (!menuOpen) {
+      return;
+    }
 
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setAboutOpen(false);
-        setContactOpen(false);
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
       }
     };
 
-    const prevOverflow = document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = prevOverflow;
+      document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [anyModalOpen]);
+  }, [menuOpen]);
 
   return (
     <>
-      <section className="relative min-h-[100svh] overflow-hidden bg-[#050b16] text-white">
-        <div className="relative min-h-[100svh]">
-          <div className="absolute inset-x-0 -top-[90px] bottom-0">
-            <Image
-              src="/images/hero-premium.jpg"
-              alt="Строительная документация"
-              fill
-              priority
-              className="object-cover object-[72%_50%] contrast-[1.04]"
-            />
-          </div>
+      <section className="relative overflow-hidden bg-[#050b16] text-white">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/hero-premium.webp"
+            alt="Строительный объект и исполнительная документация"
+            fill
+            priority
+            className="object-cover object-[78%_50%]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(92deg,rgba(5,11,22,0.95)_0%,rgba(5,11,22,0.82)_26%,rgba(5,11,22,0.52)_56%,rgba(5,11,22,0.22)_100%)]" />
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050b16] to-transparent" />
+        </div>
 
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,22,0.72)_0%,rgba(5,11,22,0.56)_22%,rgba(5,11,22,0.32)_42%,rgba(5,11,22,0.12)_62%,rgba(5,11,22,0.08)_100%)]" />
-          <div className="absolute inset-x-0 top-0 h-[140px] bg-gradient-to-b from-[#050b16]/65 to-transparent" />
-
-          <div className="relative z-20 mx-auto flex min-h-[100svh] max-w-[1680px] flex-col px-5 md:px-8 lg:px-10">
-            <header className="absolute inset-x-0 top-0 z-30">
-              <div
-                className="
-                  flex h-[84px] items-center justify-between gap-6
-                  border-b border-white/8
-                  bg-[linear-gradient(180deg,rgba(10,18,34,0.26)_0%,rgba(10,18,34,0.10)_100%)]
-                  px-5 md:px-7 lg:px-10
-                  shadow-[0_8px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.04)]
-                  backdrop-blur-[3px]
-                "
-              >
-                <div className="flex shrink-0 items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
-                    <Image
-                      src="/images/logo.png"
-                      alt="ПТО-ЮГРА"
-                      width={36}
-                      height={36}
-                      className="h-9 w-9 object-contain"
-                    />
-                  </div>
-
-                  <div className="leading-tight">
-                    <div className="text-[15px] font-semibold tracking-[0.01em] md:text-[16px]">
-                      ПТО-ЮГРА
-                    </div>
-                    <div className="text-[8px] text-white/58 md:text-[10px]">
-                      ДОКУМЕНТАЦИЯ СТРОИТЕЛЬСТВА
-                    </div>
-                  </div>
+        <div className="relative z-10 mx-auto flex min-h-screen max-w-[1680px] flex-col px-5 md:px-8 lg:px-10">
+          <header className="pt-4">
+            <div className="flex items-center justify-between gap-6 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(7,14,27,0.78)_0%,rgba(7,14,27,0.48)_100%)] px-5 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl md:px-6">
+              <a href="#" className="flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/12 bg-white/[0.04]">
+                  <Image
+                    src="/images/logo.webp"
+                    alt={company.name}
+                    width={38}
+                    height={38}
+                    className="h-9 w-9 object-contain"
+                  />
                 </div>
 
-                <nav className="hidden items-center gap-10 text-[15px] text-white/74 lg:flex">
-                  {menuItems.map((item) => {
-                    if (item.type === "modal-about") {
-                      return (
-                        <button
-                          key={item.label}
-                          type="button"
-                          onClick={() => setAboutOpen(true)}
-                          className="transition hover:text-white"
-                        >
-                          {item.label}
-                        </button>
-                      );
-                    }
-
-                    if (item.type === "modal-contact") {
-                      return (
-                        <button
-                          key={item.label}
-                          type="button"
-                          onClick={() => setContactOpen(true)}
-                          className="transition hover:text-white"
-                        >
-                          {item.label}
-                        </button>
-                      );
-                    }
-
-                    return (
-                      <a
-                        key={item.label}
-                        href={item.href}
-                        className="transition hover:text-white"
-                      >
-                        {item.label}
-                      </a>
-                    );
-                  })}
-                </nav>
-
-                <div className="flex items-center gap-15">
-                  <div className="hidden text-right lg:block">
-                    <div className="text-[14px] font-semibold text-white">
-                      +7 (3452) 55-01-55
-                    </div>
-                    <div className="text-[12px] text-white/52">
-                      Пн–Пт, 9:00–18:00
-                    </div>
+                <div className="leading-tight">
+                  <div className="text-[15px] font-semibold tracking-[0.01em] md:text-[16px]">
+                    {company.name}
                   </div>
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/52">
+                    {company.tagline}
+                  </div>
+                </div>
+              </a>
 
-                  <button
-                    aria-label="Открыть меню"
-                    className="
-                      inline-flex h-[52px] w-[52px] items-center justify-center
-                      rounded-full border border-white/8 bg-white/[0.04]
-                      transition hover:bg-white/[0.07]
-                      lg:hidden
-                    "
+              <nav className="hidden items-center gap-8 text-[14px] text-white/72 lg:flex">
+                {navigationItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="transition hover:text-white"
                   >
-                    <MenuIcon />
-                  </button>
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              <div className="hidden items-center gap-6 lg:flex">
+                <div className="text-right">
+                  <a
+                    href={contactDetails.phoneHref}
+                    className="block text-[14px] font-semibold text-white"
+                  >
+                    {contactDetails.phoneLabel}
+                  </a>
+                  <div className="text-[12px] text-white/48">
+                    {contactDetails.hours}
+                  </div>
                 </div>
+
+                <a
+                  href="#contacts"
+                  className="inline-flex h-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] px-5 text-[13px] font-medium text-white transition hover:bg-white/[0.09]"
+                >
+                  Обсудить объект
+                </a>
               </div>
-            </header>
 
-            <div className="relative flex flex-1 items-start pt-[110px] md:pt-[118px] lg:pt-[122px]">
-              <div className="max-w-[680px] pt-4 lg:pt-10">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#4b8dff]/26 bg-[#0b1f46]/72 px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-white/90 backdrop-blur-md md:text-[12px]">
+              <button
+                type="button"
+                aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
+                aria-expanded={menuOpen}
+                onClick={() => setMenuOpen((value) => !value)}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] transition hover:bg-white/[0.09] lg:hidden"
+              >
+                {menuOpen ? <CloseIcon /> : <MenuIcon />}
+              </button>
+            </div>
+          </header>
+
+          <div className="relative flex flex-1 items-center py-14 md:py-16 lg:py-20">
+            <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:gap-12">
+              <div className="max-w-[860px]">
+                <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#4b8dff]/26 bg-[#0b1f46]/72 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white/92 backdrop-blur-md md:px-5">
                   <span className="h-2.5 w-2.5 rounded-full bg-[#4b8dff]" />
-                  Аутсорсинг ПТО для строительных компаний
+                  <span className="truncate">{heroContent.badge}</span>
                 </div>
 
-                <h1 className="mt-7 max-w-[680px] text-[56px] font-semibold leading-[0.94] tracking-[-0.05em] text-white sm:text-[68px] lg:text-[84px]">
-                  Документация.
-                  <br />
-                  Сопровождение.
-                  <br />
-                  <span className="text-[#4b8dff]">Сдача объекта.</span>
+                <h1 className="mt-7 text-[46px] font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:text-[62px] lg:text-[92px]">
+                  {heroContent.titleLines.slice(0, 3).map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                  <span className="block text-[#8cb7ff]">
+                    {heroContent.titleLines[3]}
+                  </span>
                 </h1>
 
-                <p className="mt-7 max-w-[620px] text-[19px] leading-[1.65] text-white/78">
-                  Берём на себя задачи ПТО — от оформления исполнительной
-                  документации до сопровождения сдачи объекта. Работаем точно по
-                  требованиям, в срок и без лишней нагрузки на вашу команду.
+                <p className="mt-6 max-w-[660px] text-[17px] leading-8 text-white/76 md:text-[19px]">
+                  {heroContent.description}
                 </p>
 
-                <div className="mt-9 flex flex-col gap-4 sm:flex-row">
-                  <button
-                    type="button"
-                    onClick={() => setContactOpen(true)}
-                    className="inline-flex h-[62px] items-center justify-center rounded-[18px] bg-[#4b8dff] px-9 text-[18px] font-semibold text-white shadow-[0_18px_40px_rgba(75,141,255,0.35)] transition hover:-translate-y-[1px] hover:bg-[#3c7cf0]"
-                  >
-                    Получить расчёт
-                    <span className="ml-4 text-xl">→</span>
-                  </button>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {company.sectors.map((item) => (
+                    <div
+                      key={item}
+                      className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] text-white/74 backdrop-blur-md"
+                    >
+                      {item}
+                    </div>
+                  ))}
+                </div>
 
-                  <button
-                    type="button"
-                    onClick={() => setContactOpen(true)}
-                    className="inline-flex h-[62px] items-center justify-center rounded-[18px] border border-white/10 bg-white/[0.03] px-9 text-[18px] font-semibold text-white backdrop-blur-md transition hover:-translate-y-[1px] hover:bg-white/[0.06]"
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <a
+                    href="#contacts"
+                    className="inline-flex h-[58px] items-center justify-center rounded-[18px] bg-[#4b8dff] px-8 text-[17px] font-semibold text-white shadow-[0_20px_45px_rgba(75,141,255,0.35)] transition hover:-translate-y-[1px] hover:bg-[#3c7cf0]"
                   >
-                    Задать вопрос
-                  </button>
+                    Получить расчет
+                    <span className="ml-3 text-lg">→</span>
+                  </a>
+
+                  <a
+                    href="#cases"
+                    className="inline-flex h-[58px] items-center justify-center rounded-[18px] border border-white/10 bg-white/[0.04] px-8 text-[17px] font-semibold text-white backdrop-blur-md transition hover:-translate-y-[1px] hover:bg-white/[0.08]"
+                  >
+                    Смотреть кейсы
+                  </a>
+                </div>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {heroContent.pills.map((item) => (
+                    <div
+                      key={item}
+                      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] text-white/72"
+                    >
+                      <CheckMini />
+                      {item}
+                    </div>
+                  ))}
                 </div>
               </div>
+
+              <aside className="hidden lg:block">
+                <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,18,34,0.88)_0%,rgba(8,14,28,0.74)_100%)] p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl">
+                  <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8cb7ff]">
+                    Что берем на себя
+                  </div>
+
+                  <h2 className="mt-4 text-[28px] font-semibold leading-[1.02] tracking-[-0.05em] text-white">
+                    От отдельных разделов до полного контура ПТО
+                  </h2>
+
+                  <p className="mt-4 text-[14px] leading-7 text-white/62">
+                    Берем на себя документальный контур проекта, чтобы ваша
+                    команда держала фокус на стройке, сроках и производстве.
+                  </p>
+
+                  <div className="mt-6 grid gap-3">
+                    {heroContent.checklist.map((item) => (
+                      <div
+                        key={item}
+                        className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4"
+                      >
+                        <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#4b8dff]/24 bg-[#4b8dff]/12 text-[#8cb7ff]">
+                          <CheckMini />
+                        </span>
+                        <span className="text-[14px] leading-6 text-white/84">
+                          {item}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                    <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-4">
+                      <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/42">
+                        География
+                      </div>
+                      <div className="mt-2 text-[18px] font-semibold text-white">
+                        {contactDetails.location}
+                      </div>
+                    </div>
+
+                    <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-4">
+                      <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/42">
+                        Контур
+                      </div>
+                      <div className="mt-2 text-[14px] leading-6 text-white/74">
+                        {heroContent.promise}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </aside>
             </div>
           </div>
         </div>
       </section>
 
       <section className="relative bg-[#02040e] text-white">
-        <div className="mx-auto max-w-[1680px] px-5 pb-10 pt-10 md:px-8 lg:px-10 lg:pt-14">
-          <div className="grid gap-10 xl:grid-cols-[1fr_620px] xl:items-center">
-            <div className="grid gap-6 md:grid-cols-3">
-              {features.map((item) => (
-                <div key={item.title} className="max-w-[260px]">
+        <div className="mx-auto max-w-[1680px] px-5 pb-10 pt-8 md:px-8 lg:px-10 lg:pb-14">
+          <div className="grid gap-8 xl:grid-cols-[1fr_600px] xl:items-center">
+            <div className="grid gap-5 md:grid-cols-3">
+              {trustFeatures.map((item, index) => (
+                <article
+                  key={item.title}
+                  className="rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.045)_0%,rgba(255,255,255,0.018)_100%)] p-5 shadow-[0_18px_45px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+                >
                   <div className="flex items-start gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-[#6aa1ff] backdrop-blur-[18px]">
-                      {item.icon}
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-[#8cb7ff]">
+                      {index === 0 ? (
+                        <DocIcon />
+                      ) : index === 1 ? (
+                        <ClockIcon />
+                      ) : (
+                        <LayersIcon />
+                      )}
                     </div>
 
                     <div>
-                      <div className="text-[16px] font-semibold text-white">
+                      <h2 className="text-[17px] font-semibold text-white">
                         {item.title}
-                      </div>
-                      <div className="mt-2 text-[14px] leading-6 text-white/58">
+                      </h2>
+                      <p className="mt-2 text-[14px] leading-6 text-white/58">
                         {item.text}
-                      </div>
+                      </p>
                     </div>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
 
-            <div className="w-full">
-              <div
-                className="
-                  relative overflow-hidden rounded-[30px]
-                  border border-white/10
-                  bg-[linear-gradient(180deg,rgba(24,44,78,0.62)_0%,rgba(13,26,48,0.46)_55%,rgba(8,15,30,0.40)_100%)]
-                  shadow-[0_20px_60px_rgba(0,0,0,0.30),inset_0_1px_0_rgba(255,255,255,0.08)]
-                  backdrop-blur-[20px]
-                "
-              >
-                <div className="pointer-events-none absolute inset-x-0 top-0 h-[1px] bg-white/15" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(96,165,250,0.18),transparent_45%)]" />
-                <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(2,6,23,0.22)_0%,rgba(2,6,23,0)_18%,rgba(2,6,23,0)_82%,rgba(2,6,23,0.22)_100%)]" />
-
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3">
-                  {stats.map((item, index) => (
-                    <div
-                      key={item.value + item.label}
-                      className={`relative min-h-[96px] px-10 py-7 lg:min-h-[108px] ${
-                        index !== stats.length - 1
-                          ? "border-b border-white/8 sm:border-b-0 lg:border-r lg:border-white/8"
-                          : ""
-                      }`}
-                    >
-                      <div className="text-[28px] font-semibold tracking-[-0.04em] text-white">
-                        {item.value}
-                      </div>
-                      <div className="mt-2 whitespace-pre-line text-[14px] leading-6 text-white/68">
-                        {item.label}
-                      </div>
+            <div className="rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(24,44,78,0.62)_0%,rgba(13,26,48,0.46)_55%,rgba(8,15,30,0.4)_100%)] shadow-[0_24px_70px_rgba(0,0,0,0.3)] backdrop-blur-2xl">
+              <div className="grid sm:grid-cols-3">
+                {trustStats.map((item, index) => (
+                  <div
+                    key={`${item.value}-${item.label}`}
+                    className={`px-7 py-7 ${
+                      index !== trustStats.length - 1
+                        ? "border-b border-white/8 sm:border-b-0 sm:border-r"
+                        : ""
+                    }`}
+                  >
+                    <div className="text-[32px] font-semibold tracking-[-0.05em] text-white">
+                      {item.value}
                     </div>
-                  ))}
-                </div>
+                    <div className="mt-2 text-[14px] leading-6 text-white/68">
+                      {item.label}
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <AboutModal isOpen={aboutOpen} onClose={() => setAboutOpen(false)} />
-      <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
+      {menuOpen ? (
+        <div className="fixed inset-0 z-[140] bg-[#02040e]/82 px-5 py-6 backdrop-blur-xl lg:hidden">
+          <div className="mx-auto max-w-[560px] rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,15,29,0.96)_0%,rgba(5,9,20,0.98)_100%)] p-6 text-white shadow-[0_28px_90px_rgba(0,0,0,0.4)]">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="text-[18px] font-semibold">{company.name}</div>
+                <div className="mt-1 text-[12px] text-white/48">
+                  {company.tagline}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                aria-label="Закрыть меню"
+                onClick={() => setMenuOpen(false)}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+              >
+                <CloseIcon />
+              </button>
+            </div>
+
+            <div className="mt-8 grid gap-2">
+              {navigationItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4 text-[16px] font-medium text-white/82 transition hover:bg-white/[0.08]"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
+              <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/42">
+                Связаться
+              </div>
+              <a
+                href={contactDetails.phoneHref}
+                className="mt-3 block text-[22px] font-semibold text-white"
+              >
+                {contactDetails.phoneLabel}
+              </a>
+              <a
+                href={contactDetails.emailHref}
+                className="mt-2 block text-[14px] text-white/64"
+              >
+                {contactDetails.emailLabel}
+              </a>
+              <div className="mt-4 text-[13px] text-white/52">
+                {contactDetails.hours}
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 }
 
-function AboutModal({
-  isOpen,
-  onClose,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-}) {
-  if (!isOpen) return null;
-
+function MenuIcon() {
   return (
-    <div
-      className="fixed inset-0 z-[120] flex items-center justify-center p-4 md:p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-label="О компании"
-    >
-      <button
-        type="button"
-        aria-label="Закрыть модальное окно"
-        onClick={onClose}
-        className="absolute inset-0 bg-[#02040e]/72 backdrop-blur-[10px]"
-      />
-
-      <div className="relative z-10 w-full max-w-[980px] overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(11,18,32,0.98)_0%,rgba(5,8,22,0.98)_100%)] text-white shadow-[0_30px_120px_rgba(0,0,0,0.45)]">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-[-40px] top-[-40px] h-[180px] w-[180px] rounded-full bg-[#4b8dff]/12 blur-3xl" />
-          <div className="absolute bottom-[-80px] right-[-30px] h-[220px] w-[220px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
-        </div>
-
-        <div className="relative grid gap-0 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="p-6 md:p-8 lg:p-10">
-            <div className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/55">
-              О компании
-            </div>
-
-            <h2 className="mt-5 text-[32px] font-semibold leading-[0.96] tracking-[-0.05em] md:text-[42px]">
-              ПТО-ЮГРА —
-              <br />
-              команда, которая
-              <br />
-              держит объект
-              <br />
-              под контролем
-            </h2>
-
-            <p className="mt-5 max-w-[560px] text-[15px] leading-8 text-white/68">
-              Мы сопровождаем строительные объекты по линии ПТО: оформляем
-              исполнительную документацию, подключаемся к текущим задачам,
-              восстанавливаем структуру документооборота и помогаем пройти
-              этапы сдачи без лишнего стресса для команды заказчика.
-            </p>
-
-            <div className="mt-8 grid gap-3">
-              {[
-                "Работаем с промышленными, инфраструктурными и гражданскими объектами",
-                "Подключаемся как к отдельным задачам, так и к полному сопровождению",
-                "Выстраиваем понятный процесс без лишней нагрузки на команду заказчика",
-                "Фокусируемся на сроках, структуре и качестве итогового комплекта",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-start gap-3 rounded-[18px] border border-white/10 bg-white/[0.03] px-4 py-4"
-                >
-                  <span className="mt-[7px] h-2.5 w-2.5 shrink-0 rounded-full bg-[#4b8dff]" />
-                  <span className="text-[14px] leading-7 text-white/80">{item}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                }}
-                className="inline-flex h-[48px] items-center justify-center rounded-[16px] bg-[#4b8dff] px-6 text-[14px] font-medium text-white shadow-[0_18px_40px_rgba(75,141,255,0.35)] transition hover:bg-[#3c7cf0]"
-              >
-                Понятно
-                <span className="ml-2">→</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={onClose}
-                className="inline-flex h-[48px] items-center justify-center rounded-[16px] border border-white/10 bg-white/[0.04] px-6 text-[14px] font-medium text-white transition hover:bg-white/[0.08]"
-              >
-                Закрыть
-              </button>
-            </div>
-          </div>
-
-          <div className="relative min-h-[280px] border-t border-white/10 lg:min-h-full lg:border-l lg:border-t-0">
-            <Image
-              src="/images/16.webp"
-              alt="ПТО-ЮГРА"
-              fill
-              className="object-cover object-[72%_50%]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.14)_0%,rgba(2,6,23,0.5)_100%)] lg:bg-[linear-gradient(90deg,rgba(2,6,23,0.12)_0%,rgba(2,6,23,0.42)_100%)]" />
-
-            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-              <div className="rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.03)_100%)] p-5 backdrop-blur-[12px]">
-                <div className="text-[28px] font-semibold tracking-[-0.04em] text-white">
-                  500+
-                </div>
-                <div className="mt-2 text-[14px] leading-6 text-white/68">
-                  объектов сдано с оформленной и системной документацией
-                </div>
-
-                <div className="mt-5 h-px bg-white/10" />
-
-                <div className="mt-5 grid grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-[20px] font-semibold text-white">7+</div>
-                    <div className="mt-1 text-[12px] leading-5 text-white/58">
-                      лет на рынке
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="text-[20px] font-semibold text-white">30+</div>
-                    <div className="mt-1 text-[12px] leading-5 text-white/58">
-                      специалистов в команде
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Закрыть"
-              className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#02040e]/55 text-white transition hover:bg-[#02040e]/80"
-            >
-              <CloseIcon />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ContactModal({
-  isOpen,
-  onClose,
-}: {
-  isOpen: boolean;
-  onClose: () => void;
-}) {
-  if (!isOpen) return null;
-
-  return (
-    <div
-      className="fixed inset-0 z-[120] flex items-center justify-center p-4 md:p-6"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Контакты"
-    >
-      <button
-        type="button"
-        aria-label="Закрыть модальное окно"
-        onClick={onClose}
-        className="absolute inset-0 bg-[#02040e]/72 backdrop-blur-[10px]"
-      />
-
-      <div className="relative z-10 w-full max-w-[920px] overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(11,18,32,0.98)_0%,rgba(5,8,22,0.98)_100%)] text-white shadow-[0_30px_120px_rgba(0,0,0,0.45)]">
-        <div className="pointer-events-none absolute inset-0">
-          <div className="absolute left-[-50px] top-[-50px] h-[180px] w-[180px] rounded-full bg-[#4b8dff]/12 blur-3xl" />
-          <div className="absolute bottom-[-70px] right-[-20px] h-[220px] w-[220px] rounded-full bg-[#7c3aed]/10 blur-3xl" />
-        </div>
-
-        <div className="relative grid gap-0 lg:grid-cols-[1fr_0.9fr]">
-          <div className="p-6 md:p-8 lg:p-10">
-            <div className="inline-flex rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/55">
-              Контакты
-            </div>
-
-            <h2 className="mt-5 text-[32px] font-semibold leading-[0.96] tracking-[-0.05em] md:text-[42px]">
-              Обсудим ваш объект
-              <br />
-              и подберём формат
-              <br />
-              работы
-            </h2>
-
-            <p className="mt-5 max-w-[520px] text-[15px] leading-8 text-white/68">
-              Расскажите, на каком этапе находится объект и какая помощь нужна.
-              Мы быстро подключимся, оценим объём задач и предложим понятный
-              формат взаимодействия.
-            </p>
-
-            <div className="mt-8 grid gap-4">
-              <div className="rounded-[20px] border border-white/10 bg-white/[0.03] p-5">
-                <div className="text-[11px] uppercase tracking-[0.16em] text-white/45">
-                  Телефон
-                </div>
-                <a
-                  href="tel:+73452550155"
-                  className="mt-2 block text-[24px] font-semibold text-white transition hover:text-[#8cb7ff]"
-                >
-                  +7 (3452) 55-01-55
-                </a>
-                <div className="mt-1 text-[13px] text-white/55">
-                  Пн–Пт, 9:00–18:00
-                </div>
-              </div>
-
-              <div className="rounded-[20px] border border-white/10 bg-white/[0.03] p-5">
-                <div className="text-[11px] uppercase tracking-[0.16em] text-white/45">
-                  Email
-                </div>
-                <a
-                  href="mailto:info@pto-ugra.ru"
-                  className="mt-2 block text-[24px] font-semibold text-white transition hover:text-[#8cb7ff]"
-                >
-                  info@pto-ugra.ru
-                </a>
-                <div className="mt-1 text-[13px] text-white/55">
-                  Отвечаем на запросы по объектам и сопровождению
-                </div>
-              </div>
-
-              <div className="rounded-[20px] border border-white/10 bg-white/[0.03] p-5">
-                <div className="text-[11px] uppercase tracking-[0.16em] text-white/45">
-                  География
-                </div>
-                <div className="mt-2 text-[24px] font-semibold text-white">
-                  ХМАО / Тюмень
-                </div>
-                <div className="mt-1 text-[13px] text-white/55">
-                  Работаем с промышленными, инфраструктурными и гражданскими объектами
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="tel:+73452550155"
-                className="inline-flex h-[48px] items-center justify-center rounded-[16px] bg-[#4b8dff] px-6 text-[14px] font-medium text-white shadow-[0_18px_40px_rgba(75,141,255,0.35)] transition hover:bg-[#3c7cf0]"
-              >
-                Позвонить
-                <span className="ml-2">→</span>
-              </a>
-
-              <a
-                href="mailto:info@pto-ugra.ru"
-                className="inline-flex h-[48px] items-center justify-center rounded-[16px] border border-white/10 bg-white/[0.04] px-6 text-[14px] font-medium text-white transition hover:bg-white/[0.08]"
-              >
-                Написать на почту
-              </a>
-            </div>
-          </div>
-
-          <div className="relative min-h-[260px] border-t border-white/10 lg:min-h-full lg:border-l lg:border-t-0">
-            <Image
-              src="/images/16.webp"
-              alt="Контакты ПТО-ЮГРА"
-              fill
-              className="object-cover object-[76%_50%]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,6,23,0.16)_0%,rgba(2,6,23,0.58)_100%)] lg:bg-[linear-gradient(90deg,rgba(2,6,23,0.12)_0%,rgba(2,6,23,0.48)_100%)]" />
-
-            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-              <div className="rounded-[20px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.03)_100%)] p-5 backdrop-blur-[12px]">
-                <div className="text-[20px] font-semibold text-white">
-                  Быстрое подключение
-                </div>
-                <div className="mt-2 text-[14px] leading-6 text-white/68">
-                  Обсудим задачу, определим объём работ и предложим понятный
-                  формат взаимодействия без лишней бюрократии.
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Закрыть"
-              className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#02040e]/55 text-white transition hover:bg-[#02040e]/80"
-            >
-              <CloseIcon />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <span className="flex flex-col gap-[5px]">
+      <span className="block h-[2px] w-5 rounded-full bg-white/90" />
+      <span className="block h-[2px] w-5 rounded-full bg-white/90" />
+      <span className="block h-[2px] w-5 rounded-full bg-white/90" />
+    </span>
   );
 }
 
@@ -593,13 +382,17 @@ function CloseIcon() {
   );
 }
 
-function MenuIcon() {
+function CheckMini() {
   return (
-    <span className="flex flex-col gap-[5px]">
-      <span className="block h-[2px] w-5 rounded-full bg-white/90" />
-      <span className="block h-[2px] w-5 rounded-full bg-white/90" />
-      <span className="block h-[2px] w-5 rounded-full bg-white/90" />
-    </span>
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M4 8.2L6.7 10.8L12 5.5"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 

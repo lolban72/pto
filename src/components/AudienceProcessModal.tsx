@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { useTheme } from "../components/theme-provider";
+import { useTheme } from "./theme-provider";
 
 type AudienceItem = {
   title: string;
@@ -13,25 +13,27 @@ type AudienceItem = {
 type AudienceProcessModalProps = {
   isOpen: boolean;
   onClose: () => void;
-  onOpenContacts: () => void;
-  audience: AudienceItem[];
-  steps: string[];
+  audience: ReadonlyArray<AudienceItem>;
+  steps: ReadonlyArray<string>;
 };
 
 export default function AudienceProcessModal({
   isOpen,
   onClose,
-  onOpenContacts,
   audience,
   steps,
 }: AudienceProcessModalProps) {
   const { isLight } = useTheme();
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      return;
+    }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") {
+        onClose();
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -43,7 +45,9 @@ export default function AudienceProcessModal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    return null;
+  }
 
   const overlayClass = isLight
     ? "bg-[rgba(15,23,42,0.45)]"
@@ -64,7 +68,7 @@ export default function AudienceProcessModal({
     >
       <div
         className={`${modalClass} relative flex max-h-[90vh] w-full max-w-[1240px] flex-col rounded-[30px]`}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
       >
         <div
           className={`flex items-start justify-between gap-4 px-6 py-5 md:px-8 ${
@@ -72,14 +76,14 @@ export default function AudienceProcessModal({
           }`}
         >
           <div>
-            <div className="text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
+            <div className="font-mono text-[12px] uppercase tracking-[0.22em] text-[#4b8dff]">
               Формат работы
             </div>
 
             <h2 className="mt-2 text-[30px] font-semibold leading-tight tracking-[-0.03em] md:text-[40px]">
               Для кого мы работаем
               <br />
-              и как выстроен процесс
+              и как устроен процесс
             </h2>
 
             <p
@@ -87,22 +91,23 @@ export default function AudienceProcessModal({
                 isLight ? "text-slate-600" : "text-white/60"
               }`}
             >
-              Подключаемся к объектам разного масштаба, быстро встраиваемся в
-              рабочий процесс и ведём документацию так, чтобы заказчику было
-              удобно контролировать результат, сроки и состав работ.
+              Быстро встраиваемся в рабочий контур объекта, определяем правила
+              обмена данными и ведем документацию так, чтобы статус проекта был
+              понятен без лишней координации и ручного контроля.
             </p>
           </div>
 
           <button
+            type="button"
             onClick={onClose}
             aria-label="Закрыть"
-            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[20px] transition ${
+            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition ${
               isLight
                 ? "border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100"
                 : "border border-white/10 bg-white/[0.05] text-white/80 hover:bg-white/[0.08]"
             }`}
           >
-            ✕
+            <CloseIcon />
           </button>
         </div>
 
@@ -120,7 +125,7 @@ export default function AudienceProcessModal({
                   }`}
                 >
                   Подстраиваем формат взаимодействия под структуру проекта,
-                  объём документации и требования конкретного объекта.
+                  объем документации и требования конкретного объекта.
                 </p>
               </div>
 
@@ -167,8 +172,8 @@ export default function AudienceProcessModal({
                     isLight ? "text-slate-600" : "text-white/60"
                   }`}
                 >
-                  Последовательно ведём проект от первичного анализа исходных
-                  данных до подготовки комплекта и сопровождения результата.
+                  Последовательно ведем проект от анализа исходных данных до
+                  подготовки комплекта к проверке и передаче.
                 </p>
               </div>
 
@@ -176,11 +181,11 @@ export default function AudienceProcessModal({
                 {steps.map((step, index) => (
                   <article
                     key={`${step}-${index}`}
-                    className={`rounded-[22px] p-5 transition duration-300 ${
+                    className={`rounded-[22px] p-5 ${
                       isLight
                         ? "border border-slate-200 bg-slate-50 hover:bg-slate-100"
                         : "border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04)_0%,rgba(255,255,255,0.018)_100%)] hover:bg-white/[0.06]"
-                    }`}
+                    } transition duration-300`}
                   >
                     <div className="flex items-center gap-3">
                       <div
@@ -194,20 +199,20 @@ export default function AudienceProcessModal({
                       </div>
 
                       <div
-                        className={`text-[12px] font-medium tracking-[0.14em] ${
+                        className={`font-mono text-[12px] uppercase tracking-[0.14em] ${
                           isLight ? "text-slate-500" : "text-white/55"
                         }`}
                       >
-                        ЭТАП {String(index + 1).padStart(2, "0")}
+                        Этап {String(index + 1).padStart(2, "0")}
                       </div>
                     </div>
 
                     <div
-                      className={`mt-4 text-[15px] font-medium leading-6 whitespace-pre-line ${
+                      className={`mt-4 text-[15px] font-medium leading-6 ${
                         isLight ? "text-slate-800" : "text-white/90"
                       }`}
                     >
-                      {step.replace("\n", "")}
+                      {step}
                     </div>
                   </article>
                 ))}
@@ -227,7 +232,7 @@ export default function AudienceProcessModal({
                 <div className="max-w-[520px] text-[18px] font-semibold leading-tight sm:text-[20px] md:text-[24px]">
                   Нужен понятный процесс
                   <br />
-                  без хаоса?
+                  без хаоса и ручного контроля?
                 </div>
 
                 <p
@@ -235,26 +240,18 @@ export default function AudienceProcessModal({
                     isLight ? "text-slate-600" : "text-white/60"
                   }`}
                 >
-                  Подключимся к вашему объекту, определим состав работ, возьмём
-                  на себя ведение документации и подготовим комплект к проверке
-                  и сдаче.
+                  Подключимся к объекту, определим состав работ и возьмем на
+                  себя ведение документации до проверяемого результата.
                 </p>
               </div>
 
-              <button
-                type="button"
-                onClick={() => {
-                  onClose();
-                  onOpenContacts();
-                }}
-                className={`inline-flex h-[44px] items-center justify-center rounded-full px-5 text-[14px] font-medium transition ${
-                  isLight
-                    ? "bg-[#4b8dff] text-white hover:bg-[#3b7df0]"
-                    : "bg-[#4b8dff] text-white hover:bg-[#5c98ff]"
-                }`}
+              <a
+                href="#contacts"
+                onClick={onClose}
+                className="inline-flex h-[44px] items-center justify-center rounded-full bg-[#4b8dff] px-5 text-[14px] font-medium text-white transition hover:bg-[#3b7df0]"
               >
                 Связаться
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -272,6 +269,19 @@ function CheckMini() {
         strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path
+        d="M5 5L15 15M15 5L5 15"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
       />
     </svg>
   );
