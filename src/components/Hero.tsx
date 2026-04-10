@@ -10,18 +10,21 @@ import {
   trustFeatures,
   trustStats,
 } from "../lib/site-content";
+import PricingModal from "./PricingModal";
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pricingOpen, setPricingOpen] = useState(false);
 
   useEffect(() => {
-    if (!menuOpen) {
+    if (!menuOpen && !pricingOpen) {
       return;
     }
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
+        setPricingOpen(false);
       }
     };
 
@@ -33,11 +36,11 @@ export default function Hero() {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [menuOpen]);
+  }, [menuOpen, pricingOpen]);
 
   return (
     <>
-      <section className="relative overflow-hidden bg-[#050b16] text-white">
+      <section className="relative min-h-[100svh] overflow-hidden bg-[#050b16] text-white">
         <div className="absolute inset-0">
           <Image
             src="/images/hero-premium.webp"
@@ -46,36 +49,52 @@ export default function Hero() {
             priority
             className="object-cover object-[78%_50%]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(92deg,rgba(5,11,22,0.95)_0%,rgba(5,11,22,0.82)_26%,rgba(5,11,22,0.52)_56%,rgba(5,11,22,0.22)_100%)]" />
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050b16] to-transparent" />
         </div>
 
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-[1680px] flex-col px-5 md:px-8 lg:px-10">
-          <header className="pt-4">
-            <div className="flex items-center justify-between gap-6 rounded-[28px] border border-white/10 bg-[linear-gradient(180deg,rgba(7,14,27,0.78)_0%,rgba(7,14,27,0.48)_100%)] px-5 py-4 shadow-[0_18px_40px_rgba(0,0,0,0.18)] backdrop-blur-xl md:px-6">
-              <a href="#" className="flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/12 bg-white/[0.04]">
-                  <Image
-                    src="/images/logo.webp"
-                    alt={company.name}
-                    width={38}
-                    height={38}
-                    className="h-9 w-9 object-contain"
-                  />
-                </div>
+        <header className="absolute inset-x-0 top-0 z-30 w-full">
+          <div
+            className="
+              flex h-[84px] w-full items-center justify-between gap-6
+              border-b border-white/8
+              bg-[linear-gradient(180deg,rgba(10,18,34,0.26)_0%,rgba(10,18,34,0.10)_100%)]
+              px-5 md:px-7 lg:px-10
+              shadow-[0_8px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.04)]
+              backdrop-blur-[3px]
+            "
+          >
+            <a href="#" className="flex shrink-0 items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+                <Image
+                  src="/images/logo.webp"
+                  alt={company.name}
+                  width={36}
+                  height={36}
+                  className="h-9 w-9 object-contain"
+                />
+              </div>
 
-                <div className="leading-tight">
-                  <div className="text-[15px] font-semibold tracking-[0.01em] md:text-[16px]">
-                    {company.name}
-                  </div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/52">
-                    {company.tagline}
-                  </div>
+              <div className="leading-tight">
+                <div className="text-[15px] font-semibold tracking-[0.01em] md:text-[16px]">
+                  {company.name}
                 </div>
-              </a>
+                <div className="text-[8px] text-white/58 md:text-[10px]">
+                  {company.tagline}
+                </div>
+              </div>
+            </a>
 
-              <nav className="hidden items-center gap-8 text-[14px] text-white/72 lg:flex">
-                {navigationItems.map((item) => (
+            <nav className="hidden items-center gap-10 text-[15px] text-white/74 lg:flex">
+              {navigationItems.map((item) =>
+                item.href === "#pricing" ? (
+                  <button
+                    key={item.href}
+                    type="button"
+                    onClick={() => setPricingOpen(true)}
+                    className="transition hover:text-white"
+                  >
+                    {item.label}
+                  </button>
+                ) : (
                   <a
                     key={item.href}
                     href={item.href}
@@ -83,20 +102,20 @@ export default function Hero() {
                   >
                     {item.label}
                   </a>
-                ))}
-              </nav>
+                )
+              )}
+            </nav>
 
-              <div className="hidden items-center gap-6 lg:flex">
-                <div className="text-right">
-                  <a
-                    href={contactDetails.phoneHref}
-                    className="block text-[14px] font-semibold text-white"
-                  >
-                    {contactDetails.phoneLabel}
-                  </a>
-                  <div className="text-[12px] text-white/48">
-                    {contactDetails.hours}
-                  </div>
+            <div className="flex items-center gap-15">
+              <div className="hidden text-right lg:block">
+                <a
+                  href={contactDetails.phoneHref}
+                  className="block text-[14px] font-semibold text-white"
+                >
+                  {contactDetails.phoneLabel}
+                </a>
+                <div className="text-[12px] text-white/52">
+                  {contactDetails.hours}
                 </div>
               </div>
 
@@ -105,20 +124,23 @@ export default function Hero() {
                 aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"}
                 aria-expanded={menuOpen}
                 onClick={() => setMenuOpen((value) => !value)}
-                className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/[0.05] transition hover:bg-white/[0.09] lg:hidden"
+                className="
+                  inline-flex h-[52px] w-[52px] items-center justify-center
+                  rounded-full border border-white/8 bg-white/[0.04]
+                  transition hover:bg-white/[0.07]
+                  lg:hidden
+                "
               >
                 {menuOpen ? <CloseIcon /> : <MenuIcon />}
               </button>
             </div>
-          </header>
+          </div>
+        </header>
 
-          <div className="relative flex flex-1 items-center py-14 md:py-16 lg:py-20">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1680px] flex-col px-5 md:px-8 lg:px-10">
+          <div className="relative flex flex-1 items-center py-14 pt-[110px] md:py-16 md:pt-[118px] lg:py-20 lg:pt-[122px]">
             <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:gap-12">
               <div className="max-w-[860px]">
-                <div className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#4b8dff]/26 bg-[#0b1f46]/72 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-white/92 backdrop-blur-md md:px-5">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#4b8dff]" />
-                </div>
-
                 <h1 className="mt-7 text-[46px] font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:text-[62px] lg:text-[92px]">
                   {heroContent.titleLines.slice(0, 3).map((line) => (
                     <span key={line} className="block">
@@ -134,8 +156,6 @@ export default function Hero() {
                   {heroContent.description}
                 </p>
 
-               
-
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <a
                     href="#contacts"
@@ -145,16 +165,15 @@ export default function Hero() {
                     <span className="ml-3 text-lg">→</span>
                   </a>
 
-                  <a
-                    href="#cases"
+                  <button
+                    type="button"
+                    onClick={() => setPricingOpen(true)}
                     className="inline-flex h-[58px] items-center justify-center rounded-[18px] border border-white/10 bg-white/[0.04] px-8 text-[17px] font-semibold text-white backdrop-blur-md transition hover:-translate-y-[1px] hover:bg-white/[0.08]"
                   >
-                    Смотреть кейсы
-                  </a>
+                    Смотреть цены
+                  </button>
                 </div>
               </div>
-
-              
             </div>
           </div>
         </div>
@@ -240,16 +259,30 @@ export default function Hero() {
             </div>
 
             <div className="mt-8 grid gap-2">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4 text-[16px] font-medium text-white/82 transition hover:bg-white/[0.08]"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navigationItems.map((item) =>
+                item.href === "#pricing" ? (
+                  <button
+                    key={item.href}
+                    type="button"
+                    onClick={() => {
+                      setMenuOpen(false);
+                      setPricingOpen(true);
+                    }}
+                    className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-[16px] font-medium text-white/82 transition hover:bg-white/[0.08]"
+                  >
+                    {item.label}
+                  </button>
+                ) : (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4 text-[16px] font-medium text-white/82 transition hover:bg-white/[0.08]"
+                  >
+                    {item.label}
+                  </a>
+                )
+              )}
             </div>
 
             <div className="mt-6 rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
@@ -275,6 +308,11 @@ export default function Hero() {
           </div>
         </div>
       ) : null}
+
+      <PricingModal
+        isOpen={pricingOpen}
+        onClose={() => setPricingOpen(false)}
+      />
     </>
   );
 }
@@ -297,20 +335,6 @@ function CloseIcon() {
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function CheckMini() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-      <path
-        d="M4 8.2L6.7 10.8L12 5.5"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </svg>
   );

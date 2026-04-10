@@ -20,6 +20,7 @@ export const navigationItems = [
   { label: "Услуги", href: "#services" },
   { label: "Формат работы", href: "#audience" },
   { label: "Кейсы", href: "#cases" },
+  { label: "Цены", href: "#pricing" },
   { label: "Контакты", href: "#contacts" },
 ] as const;
 

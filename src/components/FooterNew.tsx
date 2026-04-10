@@ -39,20 +39,7 @@ export default function Footer() {
               {company.description}
             </p>
 
-            <div className="mt-5 grid gap-3">
-              {footerNotes.map((item) => (
-                <div
-                  key={item}
-                  className={`rounded-[18px] px-4 py-4 text-[13px] leading-6 ${
-                    isLight
-                      ? "border border-slate-200 bg-white text-slate-700"
-                      : "border border-white/10 bg-white/[0.04] text-white/74"
-                  }`}
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
+            
           </div>
 
           <div>
@@ -61,15 +48,17 @@ export default function Footer() {
             </div>
 
             <div className="mt-4 flex flex-col gap-3 text-[14px]">
-              {navigationItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="transition hover:opacity-70"
-                >
-                  {item.label}
-                </a>
-              ))}
+              {navigationItems
+                .filter((item) => item.href !== "#pricing")
+                .map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    className="transition hover:opacity-70"
+                  >
+                    {item.label}
+                  </a>
+                ))}
             </div>
           </div>
 
@@ -130,24 +119,7 @@ export default function Footer() {
               </label>
             </div>
 
-            <div
-              className={`rounded-[22px] p-4 ${
-                isLight
-                  ? "border border-slate-200 bg-white"
-                  : "border border-white/10 bg-white/[0.04]"
-              }`}
-            >
-              <div className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#4b8dff]">
-                Позиционирование
-              </div>
-              <div
-                className={`mt-3 text-[13px] leading-6 ${
-                  isLight ? "text-slate-700" : "text-white/74"
-                }`}
-              >
-                {company.tagline}
-              </div>
-            </div>
+            
           </div>
         </div>
 
