@@ -183,58 +183,7 @@ export default function Hero() {
                 </div>
               </div>
 
-              <aside className="hidden lg:block">
-                <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(10,18,34,0.88)_0%,rgba(8,14,28,0.74)_100%)] p-7 shadow-[0_24px_70px_rgba(0,0,0,0.28)] backdrop-blur-xl">
-                  <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-[#8cb7ff]">
-                    Что берем на себя
-                  </div>
-
-                  <h2 className="mt-4 text-[28px] font-semibold leading-[1.02] tracking-[-0.05em] text-white">
-                    От отдельных разделов до полного контура ПТО
-                  </h2>
-
-                  <p className="mt-4 text-[14px] leading-7 text-white/62">
-                    Берем на себя документальный контур проекта, чтобы ваша
-                    команда держала фокус на стройке, сроках и производстве.
-                  </p>
-
-                  <div className="mt-6 grid gap-3">
-                    {heroContent.checklist.map((item) => (
-                      <div
-                        key={item}
-                        className="flex items-start gap-3 rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4"
-                      >
-                        <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#4b8dff]/24 bg-[#4b8dff]/12 text-[#8cb7ff]">
-                          <CheckMini />
-                        </span>
-                        <span className="text-[14px] leading-6 text-white/84">
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                    <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-4">
-                      <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/42">
-                        География
-                      </div>
-                      <div className="mt-2 text-[18px] font-semibold text-white">
-                        {contactDetails.location}
-                      </div>
-                    </div>
-
-                    <div className="rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-4">
-                      <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/42">
-                        Контур
-                      </div>
-                      <div className="mt-2 text-[14px] leading-6 text-white/74">
-                        {heroContent.promise}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </aside>
+              
             </div>
           </div>
         </div>
