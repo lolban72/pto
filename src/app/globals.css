@@ -15,3 +15,20 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: #02040e;
+}
+
+html[data-theme="light"],
+html[data-theme="light"] body {
+  background: #f6f8fc;
+}

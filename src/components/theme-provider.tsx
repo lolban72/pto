@@ -28,20 +28,36 @@ export function ThemeProvider({
   const [theme, setThemeState] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
 
+  // 🔥 единая функция применения темы
+  const applyThemeToDocument = (nextTheme: Theme) => {
+    const bg = nextTheme === "light" ? "#f6f8fc" : "#02040e";
+
+    // html
+    document.documentElement.dataset.theme = nextTheme;
+    document.documentElement.style.colorScheme = nextTheme;
+    document.documentElement.style.backgroundColor = bg;
+
+    // body
+    document.body.style.backgroundColor = bg;
+  };
+
+  // 🔹 при загрузке
   useEffect(() => {
     const savedTheme = window.localStorage.getItem("pto-theme");
     const initialTheme: Theme = savedTheme === "light" ? "light" : "dark";
 
     setThemeState(initialTheme);
-    document.documentElement.dataset.theme = initialTheme;
-    document.documentElement.style.colorScheme = initialTheme;
+    applyThemeToDocument(initialTheme);
+
     setMounted(true);
   }, []);
 
+  // 🔹 смена темы
   const setTheme = (nextTheme: Theme) => {
     setThemeState(nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-    document.documentElement.style.colorScheme = nextTheme;
+
+    applyThemeToDocument(nextTheme);
+
     window.localStorage.setItem("pto-theme", nextTheme);
   };
 
