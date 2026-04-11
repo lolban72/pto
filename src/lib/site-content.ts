@@ -7,8 +7,8 @@ export const company = {
 } as const;
 
 export const contactDetails = {
-  phoneLabel: "+7 (9129) 00-20-15",
-  phoneHref: "tel:+79129002015",
+  phoneLabel: "+7 (9822) 22-77-34",
+  phoneHref: "tel:+79822227734",
   emailLabel: "info@пто-югра.рф",
   emailHref: "mailto:info@пто-югра.рф",
   hours: "Пн-Пт, 9:00-18:00",
