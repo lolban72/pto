@@ -7,10 +7,10 @@ export const company = {
 } as const;
 
 export const contactDetails = {
-  phoneLabel: "+7 (3452) 55-01-55",
-  phoneHref: "tel:+73452550155",
-  emailLabel: "info@pto-ugra.ru",
-  emailHref: "mailto:info@pto-ugra.ru",
+  phoneLabel: "+7 (9129) 00-20-15",
+  phoneHref: "tel:+79129002015",
+  emailLabel: "info@пто-югра.рф",
+  emailHref: "mailto:info@пто-югра.рф",
   hours: "Пн-Пт, 9:00-18:00",
   location: "ХМАО и Тюмень",
   responseNote: "Отвечаем по объектам, сопровождению и проблемным разделам ПТО.",

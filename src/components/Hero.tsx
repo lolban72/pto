@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
@@ -10,7 +11,10 @@ import {
   trustFeatures,
   trustStats,
 } from "../lib/site-content";
-import PricingModal from "./PricingModal";
+
+const PricingModal = dynamic(() => import("./PricingModal"), {
+  ssr: false,
+});
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,6 +51,7 @@ export default function Hero() {
             alt="Строительный объект и исполнительная документация"
             fill
             priority
+            sizes="100vw"
             className="object-cover object-[78%_50%]"
           />
         </div>
@@ -141,21 +146,23 @@ export default function Hero() {
           <div className="relative flex flex-1 items-center py-14 pt-[110px] md:py-16 md:pt-[118px] lg:py-20 lg:pt-[122px]">
             <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:gap-12">
               <div className="max-w-[860px]">
-                <h1 className="mt-7 text-[46px] font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:text-[62px] lg:text-[92px]">
-                  {heroContent.titleLines.slice(0, 3).map((line) => (
-                    <span key={line} className="block">
-                      {line}
+                {/* Блок с полупрозрачным фоном для текста */}
+                <div className="rounded-xl bg-black/60 p-6 lg:bg-transparent lg:p-0">
+                  <h1 className="mt-4 text-[42px] font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:text-[62px] lg:text-[92px]">
+                    {heroContent.titleLines.slice(0, 3).map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                    <span className="block text-[#8cb7ff]">
+                      {heroContent.titleLines[3]}
                     </span>
-                  ))}
-                  <span className="block text-[#8cb7ff]">
-                    {heroContent.titleLines[3]}
-                  </span>
-                </h1>
+                  </h1>
 
-                <p className="mt-6 max-w-[660px] text-[17px] leading-8 text-white/76 md:text-[19px]">
-                  {heroContent.description}
-                </p>
-
+                  <p className="mt-6 max-w-[660px] text-[17px] leading-6 md:leading-8 md:text-[19px] text-white/76">
+                    {heroContent.description}
+                  </p>
+                </div>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <a
                     href="#contacts"
@@ -309,10 +316,12 @@ export default function Hero() {
         </div>
       ) : null}
 
-      <PricingModal
-        isOpen={pricingOpen}
-        onClose={() => setPricingOpen(false)}
-      />
+      {pricingOpen ? (
+        <PricingModal
+          isOpen={pricingOpen}
+          onClose={() => setPricingOpen(false)}
+        />
+      ) : null}
     </>
   );
 }
