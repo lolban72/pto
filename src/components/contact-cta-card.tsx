@@ -78,26 +78,39 @@ export default function ContactCtaCard() {
                 ))}
               </div>
 
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href={contactDetails.phoneHref}
-                  className="inline-flex h-[48px] items-center rounded-full bg-[linear-gradient(180deg,#4f8cff_0%,#2f6ff2_100%)] px-6 text-[14px] font-medium text-white shadow-[0_18px_40px_rgba(59,130,246,0.35)] transition hover:brightness-110"
-                >
-                  Позвонить
-                  <span className="ml-2">→</span>
-                </a>
+              <div className="mt-7 flex flex-col gap-3">
+  {/* Верхний ряд: Позвонить и Написать на почту */}
+  <div className="flex gap-3">
+    <a
+      href={contactDetails.phoneHref}
+      className="flex-1 inline-flex h-[48px] items-center justify-center rounded-full bg-[linear-gradient(180deg,#4f8cff_0%,#2f6ff2_100%)] px-6 text-[14px] font-medium text-white shadow-[0_18px_40px_rgba(59,130,246,0.35)] transition hover:brightness-110"
+    >
+      Позвонить
+      <span className="ml-2">→</span>
+    </a>
 
-                <a
-                  href={contactDetails.emailHref}
-                  className={`inline-flex h-[48px] items-center rounded-full px-6 text-[14px] font-medium transition ${
-                    isLight
-                      ? "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
-                      : "border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08]"
-                  }`}
-                >
-                  Написать на почту
-                </a>
-              </div>
+    <a
+      href={contactDetails.emailHref}
+      className={`flex-1 inline-flex h-[48px] items-center justify-center rounded-full px-6 text-[14px] font-medium transition ${
+        isLight
+          ? "border border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
+          : "border border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08]"
+      }`}
+    >
+      Написать на почту
+    </a>
+  </div>
+
+  {/* Нижняя кнопка: Telegram */}
+  <a
+    href="https://t.me/pto_ugra"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex h-[48px] w-full items-center justify-center rounded-full px-6 text-[14px] font-medium bg-[#0088cc] text-white hover:bg-[#0077b3] transition"
+  >
+    Telegram
+  </a>
+</div>
             </div>
 
             <div
