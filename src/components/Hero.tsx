@@ -59,30 +59,30 @@ export default function Hero() {
         <header className="absolute inset-x-0 top-0 z-30 w-full">
           <div
             className="
-              flex h-[84px] w-full items-center justify-between gap-6
+              flex h-[76px] w-full items-center justify-between gap-3
               border-b border-white/8
               bg-[linear-gradient(180deg,rgba(10,18,34,0.26)_0%,rgba(10,18,34,0.10)_100%)]
-              px-5 md:px-7 lg:px-10
+              px-3 sm:px-5 md:h-[84px] md:px-7 lg:px-10
               shadow-[0_8px_24px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.04)]
               backdrop-blur-[3px]
             "
           >
-            <a href="#" className="flex shrink-0 items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04]">
+            <a href="#" className="flex min-w-0 shrink items-center gap-2 sm:gap-3">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center  md:h-11 md:w-11">
                 <Image
-                  src="/images/logo.webp"
+                  src="/images/logo.png"
                   alt={company.name}
-                  width={36}
-                  height={36}
-                  className="h-9 w-9 object-contain"
+                  width={50}
+                  height={50}
+                  className="h-10 w-10 object-contain md:h-12 md:w-12"
                 />
               </div>
 
-              <div className="leading-tight">
-                <div className="text-[15px] font-semibold tracking-[0.01em] md:text-[16px]">
+              <div className="min-w-0 leading-tight">
+                <div className="truncate text-[13px] font-semibold tracking-[0.01em] sm:text-[15px] md:text-[16px]">
                   {company.name}
                 </div>
-                <div className="text-[8px] text-white/58 md:text-[10px]">
+                <div className="line-clamp-1 text-[8px] text-white/58 sm:text-[9px] md:text-[10px]">
                   {company.tagline}
                 </div>
               </div>
@@ -111,7 +111,7 @@ export default function Hero() {
               )}
             </nav>
 
-            <div className="flex items-center gap-15">
+            <div className="flex shrink-0 items-center gap-3 md:gap-5 lg:gap-15">
               <div className="hidden text-right lg:block">
                 <a
                   href={contactDetails.phoneHref}
@@ -130,9 +130,10 @@ export default function Hero() {
                 aria-expanded={menuOpen}
                 onClick={() => setMenuOpen((value) => !value)}
                 className="
-                  inline-flex h-[52px] w-[52px] items-center justify-center
+                  inline-flex h-[46px] w-[46px] shrink-0 items-center justify-center
                   rounded-full border border-white/8 bg-white/[0.04]
                   transition hover:bg-white/[0.07]
+                  sm:h-[50px] sm:w-[50px]
                   lg:hidden
                 "
               >
@@ -142,13 +143,12 @@ export default function Hero() {
           </div>
         </header>
 
-        <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1680px] flex-col px-5 md:px-8 lg:px-10">
-          <div className="relative flex flex-1 items-center py-14 pt-[110px] md:py-16 md:pt-[118px] lg:py-20 lg:pt-[122px]">
+        <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1680px] flex-col px-3 sm:px-5 md:px-8 lg:px-10">
+          <div className="relative flex flex-1 items-center py-12 pt-[96px] sm:py-14 sm:pt-[110px] md:py-16 md:pt-[118px] lg:py-20 lg:pt-[122px]">
             <div className="grid w-full gap-10 lg:grid-cols-[minmax(0,1.1fr)_420px] lg:gap-12">
-              <div className="max-w-[860px]">
-                {/* Блок с полупрозрачным фоном для текста */}
-                <div className="rounded-xl bg-black/60 p-6 lg:bg-transparent lg:p-0">
-                  <h1 className="mt-4 text-[42px] font-semibold leading-[0.9] tracking-[-0.07em] text-white sm:text-[62px] lg:text-[92px]">
+              <div className="max-w-[860px] min-w-0">
+                <div className="rounded-xl bg-black/60 p-4 sm:p-6 lg:bg-transparent lg:p-0">
+                  <h1 className="mt-2 text-[36px] font-semibold leading-[0.95] tracking-[-0.06em] text-white sm:mt-4 sm:text-[42px] sm:tracking-[-0.07em] md:text-[62px] lg:text-[92px]">
                     {heroContent.titleLines.slice(0, 3).map((line) => (
                       <span key={line} className="block">
                         {line}
@@ -159,23 +159,24 @@ export default function Hero() {
                     </span>
                   </h1>
 
-                  <p className="mt-6 max-w-[660px] text-[17px] leading-6 md:leading-8 md:text-[19px] text-white/76">
+                  <p className="mt-4 max-w-[660px] text-[13px] leading-5 text-white/76 sm:mt-6 sm:text-[17px] sm:leading-6 md:text-[19px] md:leading-8">
                     {heroContent.description}
                   </p>
                 </div>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+
+                <div className="mt-6 flex flex-col gap-3 sm:mt-8 sm:gap-4 sm:flex-row">
                   <a
                     href="#contacts"
-                    className="inline-flex h-[58px] items-center justify-center rounded-[18px] bg-[#4b8dff] px-8 text-[17px] font-semibold text-white shadow-[0_20px_45px_rgba(75,141,255,0.35)] transition hover:-translate-y-[1px] hover:bg-[#3c7cf0]"
+                    className="inline-flex h-[52px] items-center justify-center rounded-[18px] bg-[#4b8dff] px-6 text-[15px] font-semibold text-white shadow-[0_20px_45px_rgba(75,141,255,0.35)] transition hover:-translate-y-[1px] hover:bg-[#3c7cf0] sm:h-[58px] sm:px-8 sm:text-[17px]"
                   >
                     Получить расчет
-                    <span className="ml-3 text-lg">→</span>
+                    <span className="ml-2 text-lg sm:ml-3">→</span>
                   </a>
 
                   <button
                     type="button"
                     onClick={() => setPricingOpen(true)}
-                    className="inline-flex h-[58px] items-center justify-center rounded-[18px] border border-white/10 bg-white/[0.04] px-8 text-[17px] font-semibold text-white backdrop-blur-md transition hover:-translate-y-[1px] hover:bg-white/[0.08]"
+                    className="inline-flex h-[52px] items-center justify-center rounded-[18px] border border-white/10 bg-white/[0.04] px-6 text-[15px] font-semibold text-white backdrop-blur-md transition hover:-translate-y-[1px] hover:bg-white/[0.08] sm:h-[58px] sm:px-8 sm:text-[17px]"
                   >
                     Смотреть цены
                   </button>
@@ -187,9 +188,9 @@ export default function Hero() {
       </section>
 
       <section className="relative bg-[#02040e] text-white">
-        <div className="mx-auto max-w-[1680px] px-5 pb-10 pt-8 md:px-8 lg:px-10 lg:pb-14">
-          <div className="grid gap-8 xl:grid-cols-[1fr_600px] xl:items-center">
-            <div className="grid gap-5 md:grid-cols-3">
+        <div className="mx-auto max-w-[1680px] px-3 pb-8 pt-6 sm:px-5 sm:pb-10 sm:pt-8 md:px-8 lg:px-10 lg:pb-14">
+          <div className="grid gap-6 xl:grid-cols-[1fr_600px] xl:items-center xl:gap-8">
+            <div className="grid gap-4 md:grid-cols-3 md:gap-5">
               {trustFeatures.map((item, index) => (
                 <article
                   key={item.title}
@@ -206,7 +207,7 @@ export default function Hero() {
                       )}
                     </div>
 
-                    <div>
+                    <div className="min-w-0">
                       <h2 className="text-[17px] font-semibold text-white">
                         {item.title}
                       </h2>
@@ -224,13 +225,13 @@ export default function Hero() {
                 {trustStats.map((item, index) => (
                   <div
                     key={`${item.value}-${item.label}`}
-                    className={`px-7 py-7 ${
+                    className={`px-6 py-6 sm:px-7 sm:py-7 ${
                       index !== trustStats.length - 1
                         ? "border-b border-white/8 sm:border-b-0 sm:border-r"
                         : ""
                     }`}
                   >
-                    <div className="text-[32px] font-semibold tracking-[-0.05em] text-white">
+                    <div className="text-[28px] font-semibold tracking-[-0.05em] text-white sm:text-[32px]">
                       {item.value}
                     </div>
                     <div className="mt-2 text-[14px] leading-6 text-white/68">
@@ -245,12 +246,14 @@ export default function Hero() {
       </section>
 
       {menuOpen ? (
-        <div className="fixed inset-0 z-[140] bg-[#02040e]/82 px-5 py-6 backdrop-blur-xl lg:hidden">
-          <div className="mx-auto max-w-[560px] rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,15,29,0.96)_0%,rgba(5,9,20,0.98)_100%)] p-6 text-white shadow-[0_28px_90px_rgba(0,0,0,0.4)]">
+        <div className="fixed inset-0 z-[140] bg-[#02040e]/82 px-3 py-4 backdrop-blur-xl sm:px-5 sm:py-6 lg:hidden">
+          <div className="mx-auto max-w-[560px] rounded-[26px] border border-white/10 bg-[linear-gradient(180deg,rgba(8,15,29,0.96)_0%,rgba(5,9,20,0.98)_100%)] p-4 text-white shadow-[0_28px_90px_rgba(0,0,0,0.4)] sm:rounded-[30px] sm:p-6">
             <div className="flex items-center justify-between gap-4">
-              <div>
-                <div className="text-[18px] font-semibold">{company.name}</div>
-                <div className="mt-1 text-[12px] text-white/48">
+              <div className="min-w-0">
+                <div className="truncate text-[17px] font-semibold sm:text-[18px]">
+                  {company.name}
+                </div>
+                <div className="mt-1 line-clamp-1 text-[12px] text-white/48">
                   {company.tagline}
                 </div>
               </div>
@@ -259,13 +262,13 @@ export default function Hero() {
                 type="button"
                 aria-label="Закрыть меню"
                 onClick={() => setMenuOpen(false)}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
+                className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04]"
               >
                 <CloseIcon />
               </button>
             </div>
 
-            <div className="mt-8 grid gap-2">
+            <div className="mt-6 grid gap-2 sm:mt-8">
               {navigationItems.map((item) =>
                 item.href === "#pricing" ? (
                   <button
@@ -275,7 +278,7 @@ export default function Hero() {
                       setMenuOpen(false);
                       setPricingOpen(true);
                     }}
-                    className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-[16px] font-medium text-white/82 transition hover:bg-white/[0.08]"
+                    className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-4 text-left text-[15px] font-medium text-white/82 transition hover:bg-white/[0.08] sm:rounded-[20px] sm:text-[16px]"
                   >
                     {item.label}
                   </button>
@@ -284,7 +287,7 @@ export default function Hero() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
-                    className="rounded-[20px] border border-white/10 bg-white/[0.04] px-4 py-4 text-[16px] font-medium text-white/82 transition hover:bg-white/[0.08]"
+                    className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-4 text-[15px] font-medium text-white/82 transition hover:bg-white/[0.08] sm:rounded-[20px] sm:text-[16px]"
                   >
                     {item.label}
                   </a>
@@ -292,19 +295,19 @@ export default function Hero() {
               )}
             </div>
 
-            <div className="mt-6 rounded-[22px] border border-white/10 bg-white/[0.04] p-5">
+            <div className="mt-5 rounded-[20px] border border-white/10 bg-white/[0.04] p-4 sm:mt-6 sm:rounded-[22px] sm:p-5">
               <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/42">
                 Связаться
               </div>
               <a
                 href={contactDetails.phoneHref}
-                className="mt-3 block text-[22px] font-semibold text-white"
+                className="mt-3 block text-[20px] font-semibold text-white sm:text-[22px]"
               >
                 {contactDetails.phoneLabel}
               </a>
               <a
                 href={contactDetails.emailHref}
-                className="mt-2 block text-[14px] text-white/64"
+                className="mt-2 block break-all text-[14px] text-white/64"
               >
                 {contactDetails.emailLabel}
               </a>
